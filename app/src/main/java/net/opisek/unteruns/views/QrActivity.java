@@ -44,7 +44,7 @@ public class QrActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(QrActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
-                        QrModel res = MainRepository.getInstance().getQr(result.getText());
+                        QrModel res = MainRepository.getInstance().getQrCode(result.getText());
                         if (res != null && res instanceof RouteQrModel) {
                             Toast.makeText(QrActivity.this, ((RouteQrModel)res).location.name, Toast.LENGTH_SHORT).show();
                         }
