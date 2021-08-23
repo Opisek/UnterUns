@@ -3,10 +3,10 @@ package net.opisek.unteruns.models;
 import java.util.UUID;
 
 public class RouteQrModel extends QrModel {
-    public final String name;
+    public final LocationModel location;
 
-    public RouteQrModel(String id, String name) {
+    public RouteQrModel(String id, LocationModel location) {
         super(id);
-        this.name = name;
+        this.location = location;
     }
 }

@@ -3,7 +3,6 @@ package net.opisek.unteruns.views;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,9 +44,9 @@ public class QrActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(QrActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
-                        QrModel res = MainRepository.getInstance().getQrModel(result.getText());
+                        QrModel res = MainRepository.getInstance().getQr(result.getText());
                         if (res != null && res instanceof RouteQrModel) {
-                            Toast.makeText(QrActivity.this, ((RouteQrModel)res).name, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(QrActivity.this, ((RouteQrModel)res).location.name, Toast.LENGTH_SHORT).show();
                         }
                         scanner.startPreview();
                     }
