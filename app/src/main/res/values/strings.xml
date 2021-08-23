@@ -1,4 +1,20 @@
 <resources>
     <string name="app_name">Unter Uns</string>
-    <string name="title_activity_testact">testact</string>
+
+    <!-- Menu -->
+
+    <string name="title_activity_menu">Willkommen in der Unter Uns App!</string>
+
+    <string name="button_menu_start">Spiel Starten</string>
+    <string name="button_menu_continue">Spiel Fortsetzen</string>
+    <string name="button_menu_credits">Credits</string>
+
+    <!-- Compass -->
+
+    <string name="title_activity_compass">Folgen Sie dem Kompass, um ans nächste Ziel zu gelangen.</string>
+
+    <!-- QR -->
+
+    <string name="title_activity_qr">Scannen Sie den QR Code, um fortzufolgen.</string>
+
 </resources>

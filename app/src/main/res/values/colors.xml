@@ -2,7 +2,12 @@
 <resources>
     <color name="colorForegroundLight">#FFFFFF</color>
     <color name="colorForegroundDark">#000000</color>
+
+    <color name="colorBackgroundDark">#363638</color>
+    <color name="colorBackgroundLight">#DCE7E7</color>
+
     <color name="colorPrimary">#5B56B8</color>
     <color name="colorPrimaryDark">#2F2D59</color>
+
     <color name="colorAccent">#8F8CD1</color>
 </resources>
