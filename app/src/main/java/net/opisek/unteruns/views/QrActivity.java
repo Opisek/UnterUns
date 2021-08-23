@@ -17,6 +17,9 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 
 import net.opisek.unteruns.R;
+import net.opisek.unteruns.models.QrModel;
+import net.opisek.unteruns.models.RouteQrModel;
+import net.opisek.unteruns.repositories.MainRepository;
 
 public class QrActivity extends AppCompatActivity {
 
@@ -42,6 +45,10 @@ public class QrActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(QrActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
+                        QrModel res = MainRepository.getInstance().getQrModel(result.getText());
+                        if (res != null && res instanceof RouteQrModel) {
+                            Toast.makeText(QrActivity.this, ((RouteQrModel)res).name, Toast.LENGTH_SHORT).show();
+                        }
                         scanner.startPreview();
                     }
                 });
@@ -54,10 +61,8 @@ public class QrActivity extends AppCompatActivity {
         String perms = Manifest.permission.CAMERA;
         int val = getApplicationContext().checkCallingOrSelfPermission(perms);
         if (val == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(QrActivity.this, "granted", Toast.LENGTH_SHORT).show();
             scanner.startPreview();
         } else {
-            Toast.makeText(QrActivity.this, String.valueOf(val), Toast.LENGTH_SHORT).show();
             pendingRequest = (int)(System.currentTimeMillis()/1000);
             ActivityCompat.requestPermissions(QrActivity.this, new String[] {perms}, pendingRequest);
         }
