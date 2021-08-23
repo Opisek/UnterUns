@@ -6,6 +6,7 @@ import net.opisek.unteruns.models.GpsModel;
 import net.opisek.unteruns.models.LocationModel;
 import net.opisek.unteruns.models.QrModel;
 import net.opisek.unteruns.models.RouteQrModel;
+import net.opisek.unteruns.models.WaypointModel;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -49,6 +50,8 @@ public class MainRepository {
         addLocation(new LocationModel("see",        "Kleiner See",          48.667600660245240d, 11.765604095755492d));
         addLocation(new LocationModel("kappellchen","Kleines Kappellchen",  48.660858476010720d, 11.771331706837545d));
         addLocation(new LocationModel("ggm",        "GGM",                  48.649638113113600d, 11.769270510916570d));
+
+        addLocation(new LocationModel("eingang-kreuzung-1",48.655620681852994d, 11.768300862382462d));
     }
 
     public LocationModel getLoc(String id) {
@@ -57,24 +60,26 @@ public class MainRepository {
 
     // ROUTES
 
-    private HashMap<String, LocationModel[]> routes;
+    private HashMap<String, WaypointModel[]> routes;
 
     private void initializeRoutes() {
-        routes.put("easy", new LocationModel[] {
-                getLoc("ggm"),
-                getLoc("eingang"),
-                getLoc("koloman"),
-                getLoc("kapellchen"),
-                getLoc("ggm")
+        routes = new HashMap<>();
+        routes.put("easy", new WaypointModel[] {
+                new WaypointModel(getLoc("ggm")),
+                new WaypointModel(getLoc("eingang")),
+                new WaypointModel(getLoc("koloman")),
+                new WaypointModel(getLoc("kapellchen"), Riddle.POSTCARDS),
+                new WaypointModel(getLoc("ggm"))
         });
-        routes.put("hard", new LocationModel[] {
-                getLoc("ggm"),
-                getLoc("eingang"),
-                getLoc("kreuzung"),
-                getLoc("koloman"),
-                getLoc("see"),
-                getLoc("kapellchen"),
-                getLoc("ggm")
+        routes.put("hard", new WaypointModel[] {
+                new WaypointModel(getLoc("ggm")),
+                new WaypointModel(getLoc("eingang")),
+                new WaypointModel(getLoc("eingang-kreuzung-1")),
+                new WaypointModel(getLoc("kreuzung")),
+                new WaypointModel(getLoc("koloman")),
+                new WaypointModel(getLoc("see")),
+                new WaypointModel(getLoc("kapellchen"), Riddle.POSTCARDS),
+                new WaypointModel(getLoc("ggm"))
         });
     }
 
@@ -97,5 +102,12 @@ public class MainRepository {
 
     public QrModel getQr(String id) {
         return qrCodes.get(UUID.fromString(id));
+    }
+
+    // RIDDLES
+
+    public enum Riddle {
+        NONE,
+        POSTCARDS
     }
 }
