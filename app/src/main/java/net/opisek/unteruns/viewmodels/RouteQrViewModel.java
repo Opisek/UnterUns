@@ -35,7 +35,7 @@ public class RouteQrViewModel extends QrViewModel {
     public void onQrScan(QrModel qr) {
         if (!(qr instanceof RouteQrModel)) return; // not a box code
         if (((RouteQrModel)qr).location != myStop.location) return; // wrong box
-        setToastMessage("box found :D");
+        setToastMessage("box found! :D");
         switch (myStop.riddle) {
             case POSTCARDS:
                 break;
