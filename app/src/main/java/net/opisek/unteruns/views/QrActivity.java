@@ -3,12 +3,15 @@ package net.opisek.unteruns.views;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Pair;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
@@ -16,11 +19,12 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 
 import net.opisek.unteruns.R;
-import net.opisek.unteruns.models.QrModel;
-import net.opisek.unteruns.models.RouteQrModel;
-import net.opisek.unteruns.repositories.MainRepository;
+import net.opisek.unteruns.viewmodels.QrViewModel;
+import net.opisek.unteruns.viewmodels.RouteQrViewModel;
 
 public class QrActivity extends AppCompatActivity {
+
+    private QrViewModel viewModel;
 
     private CodeScanner scanner;
     private CodeScannerView scannerView;
@@ -33,6 +37,16 @@ public class QrActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr);
+        viewModel = ViewModelProviders.of(this).get(RouteQrViewModel.class);
+
+        // toasts
+        final Observer<Pair<String, Long>> toastObserver = new Observer<Pair<String, Long>>() {
+            @Override
+            public void onChanged(@Nullable final Pair<String, Long> toast) {
+                Toast.makeText(QrActivity.this, toast.first, Toast.LENGTH_SHORT).show();
+            }
+        };
+        ((RouteQrViewModel)viewModel).getToastMessage().observe(this, toastObserver);
 
         // qr scanner
         scannerView = findViewById(R.id.scanner_view);
@@ -43,11 +57,7 @@ public class QrActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(QrActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
-                        QrModel res = MainRepository.getInstance().getQrCode(result.getText());
-                        if (res != null && res instanceof RouteQrModel) {
-                            Toast.makeText(QrActivity.this, ((RouteQrModel)res).location.name, Toast.LENGTH_SHORT).show();
-                        }
+                        viewModel.interpretUUID(result.getText());
                         scanner.startPreview();
                     }
                 });

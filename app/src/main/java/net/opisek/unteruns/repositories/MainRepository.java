@@ -31,7 +31,7 @@ public class MainRepository {
     private MainRepository() {
         initiateLocations();
         initializeRoutes();
-        initiateQrCodes();
+        initializeQrCodes();
     }
 
     // COMPASS
@@ -51,11 +51,12 @@ public class MainRepository {
     }
 
     private void initiateLocations() {
+        locations = new HashMap<>();
         addLocation(new LocationModel("eingang",    "Waldeingang",          48.651969645503144d, 11.767538939916697d));
         addLocation(new LocationModel("kreuzung",   "Kreuzung",             48.655620681852994d, 11.768300862382462d));
         addLocation(new LocationModel("koloman",    "Kapelle St. Koloman",  48.661686910045980d, 11.756360174609688d));
         addLocation(new LocationModel("see",        "Kleiner See",          48.667600660245240d, 11.765604095755492d));
-        addLocation(new LocationModel("kappellchen","Kleines Kappellchen",  48.660858476010720d, 11.771331706837545d));
+        addLocation(new LocationModel("kapellchen","Kleines Kapellchen",  48.660858476010720d, 11.771331706837545d));
         addLocation(new LocationModel("ggm",        "GGM",                  48.649638113113600d, 11.769270510916570d));
 
         addLocation(new LocationModel("eingang-kreuzung-1",48.655620681852994d, 11.768300862382462d));
@@ -137,6 +138,10 @@ public class MainRepository {
         return result;
     }
 
+    public WaypointModel currentStop() {
+        return route.waypoints[routeProgress];
+    }
+
     public void reachedWaypoint() {
         routeProgress++;
     }
@@ -152,7 +157,7 @@ public class MainRepository {
         qrCodes.put(qr.id, qr);
     }
 
-    private void initiateQrCodes() {
+    private void initializeQrCodes() {
         qrCodes = new HashMap<>();
         addQrCode(new RouteQrModel("17064bd6-5ee2-4b52-b397-d4beac844307", getLocation("eingang")));
         addQrCode(new RouteQrModel("6e40c051-df1f-4964-b77d-647c1d02265e", getLocation("kreuzung")));

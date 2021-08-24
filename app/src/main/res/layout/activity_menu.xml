@@ -26,6 +26,8 @@
             android:layout_weight="1"
             android:layout_marginBottom="10dp"
 
+            android:id="@+id/button_menu_start"
+
             android:text="@string/button_menu_start"
             android:textAlignment="center"
             android:gravity="center"
@@ -38,6 +40,8 @@
             android:layout_weight="1"
             android:layout_marginBottom="10dp"
 
+            android:id="@+id/button_menu_continue"
+
             android:text="@string/button_menu_continue"
             android:textAlignment="center"
             android:gravity="center"
@@ -48,6 +52,8 @@
             android:layout_width="fill_parent"
             android:layout_height="0px"
             android:layout_weight="1"
+
+            android:id="@+id/button_menu_credits"
 
             android:text="@string/button_menu_credits"
             android:textAlignment="center"
