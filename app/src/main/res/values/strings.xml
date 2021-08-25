@@ -9,12 +9,17 @@
     <string name="button_menu_continue">Spiel Fortsetzen</string>
     <string name="button_menu_credits">Credits</string>
 
+    <!-- Routes -->
+
+    <string name="title_activity_routes">Wählen Sie die Schwierigkeitsstufe.</string>
+
     <!-- Compass -->
 
     <string name="title_activity_compass">Folgen Sie dem Kompass, um ans nächste Ziel zu gelangen.</string>
 
     <!-- QR -->
 
-    <string name="title_activity_qr">Scannen Sie den QR Code, um fortzufolgen.</string>
+    <string name="title_activity_qr_route">Scannen Sie den QR Code, um fortzufolgen.</string>
+    <string name="title_activity_qr_continue">Scannen Sie den letzten QR Code, um dort wieder anzufangen.</string>
 
 </resources>

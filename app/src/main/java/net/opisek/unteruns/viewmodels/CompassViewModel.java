@@ -21,9 +21,12 @@ public class CompassViewModel extends ViewModel {
     WaypointModel nextWaypoint;
     WaypointModel nextStop;
 
+    private long activityStartTimestamp;
+
     public CompassViewModel() {
+        activityStartTimestamp = System.currentTimeMillis();
+
         mainRepository = MainRepository.getInstance();
-        mainRepository.pickRoute("Leicht");
         nextWaypoint = mainRepository.nextWaypoint();
         nextStop = mainRepository.nextStop();
 
@@ -34,7 +37,7 @@ public class CompassViewModel extends ViewModel {
                 getBearing().setValue(gpsRepository.getBearing(nextWaypoint.location.location));
                 getDistanceWaypoint().setValue(gpsRepository.getDistance(nextWaypoint.location.location));
 
-                if (getDistanceWaypoint().getValue() <= 3f) {
+                if (getDistanceWaypoint().getValue() <= 3f && System.currentTimeMillis() - activityStartTimestamp > 1000) {
                     mainRepository.reachedWaypoint();
                     if (nextWaypoint == nextStop) {
                         getStopReached().setValue(true);

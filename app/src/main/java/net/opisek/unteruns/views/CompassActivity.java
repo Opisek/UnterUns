@@ -66,7 +66,6 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compass);
-        setTitle("Kompass");
 
         desiredRotation = 0f;
         currentRotation = 0f;
@@ -134,7 +133,9 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
     }
 
     private void stopReached() {
-        startActivity(new Intent(this, QrActivity.class));
+        Intent intent = new Intent(this, QrActivity.class);
+        intent.putExtra("type", QrActivity.QrType.ROUTE);
+        startActivity(intent);
     }
 
     @Override

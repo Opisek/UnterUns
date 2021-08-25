@@ -2,8 +2,6 @@ package net.opisek.unteruns.repositories;
 
 import android.util.Pair;
 
-import androidx.lifecycle.MutableLiveData;
-
 import net.opisek.unteruns.models.LocationModel;
 import net.opisek.unteruns.models.QrModel;
 import net.opisek.unteruns.models.RouteModel;
@@ -12,7 +10,6 @@ import net.opisek.unteruns.models.WaypointModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.UUID;
 
 public class MainRepository {
@@ -56,13 +53,13 @@ public class MainRepository {
 
     // ROUTES
 
-    private LinkedHashMap<String, RouteModel> routes;
+    private ArrayList<RouteModel> routes;
     private void addRoute(RouteModel route) {
-        routes.put(route.name, route);
+        routes.add(route);
     }
 
     private void initializeRoutes() {
-        routes = new LinkedHashMap<>();
+        routes = new ArrayList<>();
         addRoute(
                 new RouteModel("Leicht", "4 Stunden",
                         new WaypointModel[]{
@@ -90,22 +87,21 @@ public class MainRepository {
         );
     }
 
-    public Pair<String, String>[] getRoutes() {
-        String[] routeOptions = (String[])routes.keySet().toArray();
+    public ArrayList<Pair<String, String>> getRoutes() {
         ArrayList<Pair<String, String>> result = new ArrayList<>();
-        for (int i = 0; i < routeOptions.length; i++) {
-            String name = routeOptions[i];
-            result.add(new Pair<>(name, routes.get(name).description));
+        for (int i = 0; i < routes.size(); i++) {
+            RouteModel r = routes.get(i);
+            result.add(new Pair<>(r.name, r.description));
         }
-        return (Pair<String, String>[])result.toArray();
+        return result;
     }
 
     private RouteModel route;
     private int routeProgress;
 
-    public boolean pickRoute(String name) {
-        if (!routes.containsKey(name)) return false;
-        route = routes.get(name);
+    public boolean pickRoute(int index) {
+        if (index < 0 || index > routes.size()) return false;
+        route = routes.get(index);
         routeProgress = -1;
         return true;
     }
@@ -129,6 +125,18 @@ public class MainRepository {
     public WaypointModel currentStop() {
         if (routeProgress == -1) return null;
         return route.waypoints[routeProgress];
+    }
+
+    public boolean setStop(LocationModel loc) {
+        boolean found = false;
+        for (int i = 0; i < route.waypoints.length; i++) {
+            if (route.waypoints[i].location == loc) {
+                found = true;
+                routeProgress = i;
+                break;
+            }
+        }
+        return found;
     }
 
     public void reachedWaypoint() {
