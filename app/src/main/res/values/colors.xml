@@ -10,4 +10,7 @@
     <color name="colorPrimaryDark">#2F2D59</color>
 
     <color name="colorAccent">#8F8CD1</color>
+
+    <color name="colorScrollbarLight">#8F8CD1</color>
+    <color name="colorScrolltrackLight">#22FFFFFF</color>
 </resources>

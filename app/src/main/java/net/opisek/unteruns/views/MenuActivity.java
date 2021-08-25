@@ -33,6 +33,12 @@ public class MenuActivity extends AppCompatActivity {
                 showCredits();
             }
         });
+
+        findViewById(R.id.button_menu_qr).setOnClickListener(new View.OnClickListener(){
+            @Override public void onClick(View v) {
+                qrInterpreter();
+            }
+        });
     }
 
     private void startGame() {
@@ -46,7 +52,12 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
     private void showCredits() {
-
+        startActivity(new Intent(this, CreditsActivity.class));
+    }
+    private void qrInterpreter() {
+        Intent intent = new Intent(this, QrActivity.class);
+        intent.putExtra("type", QrActivity.QrType.TEST);
+        startActivity(intent);
     }
 
 

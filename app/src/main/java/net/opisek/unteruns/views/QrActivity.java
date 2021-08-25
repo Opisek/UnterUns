@@ -4,7 +4,9 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
+import android.view.Gravity;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.budiyev.android.codescanner.CodeScanner;
@@ -26,12 +29,14 @@ import net.opisek.unteruns.repositories.MainRepository;
 import net.opisek.unteruns.viewmodels.ContinueQrViewModel;
 import net.opisek.unteruns.viewmodels.QrViewModel;
 import net.opisek.unteruns.viewmodels.RouteQrViewModel;
+import net.opisek.unteruns.viewmodels.TestQrViewModel;
 
 public class QrActivity extends AppCompatActivity {
 
     public enum QrType {
         ROUTE,
         CONTINUE,
+        TEST,
         POSTCARDS
     }
     private QrType myQrType;
@@ -63,6 +68,16 @@ public class QrActivity extends AppCompatActivity {
                 title.setText(R.string.title_activity_qr_continue);
                 viewModel = ViewModelProviders.of(this).get(ContinueQrViewModel.class);
                 observerRiddle(((ContinueQrViewModel)viewModel).getRiddle());
+                break;
+            case TEST:
+                title.setText("QR Tester");
+                viewModel = ViewModelProviders.of(this).get(TestQrViewModel.class);
+                ((TestQrViewModel)viewModel).getToast().observe(this, new Observer<Pair<String, Long>>() {
+                    @Override
+                    public void onChanged(Pair<String, Long> toast) {
+                        makeToast(toast.first);
+                    }
+                });
                 break;
         }
 
@@ -127,5 +142,11 @@ public class QrActivity extends AppCompatActivity {
             default:
                 startActivity(new Intent(this, CompassActivity.class));
         }
+    }
+
+    private void makeToast(String toast) {
+        Toast toastt = Toast.makeText(this, toast, Toast.LENGTH_LONG);
+        toastt.setGravity(Gravity.BOTTOM,0,40);
+        toastt.show();
     }
 }

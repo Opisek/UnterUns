@@ -23,6 +23,11 @@
             android:parentActivityName=".views.MenuActivity">
         </activity>
         <activity
+            android:name=".views.CreditsActivity"
+            android:label="Credits"
+            android:parentActivityName=".views.MenuActivity">
+        </activity>
+        <activity
             android:name=".views.CompassActivity"
             android:label="Kompass">
         </activity>
