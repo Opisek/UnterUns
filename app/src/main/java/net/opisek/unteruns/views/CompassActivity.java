@@ -2,6 +2,7 @@ package net.opisek.unteruns.views;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -23,6 +24,8 @@ import androidx.lifecycle.ViewModelProviders;
 import net.opisek.unteruns.R;
 import net.opisek.unteruns.repositories.GpsRepository;
 import net.opisek.unteruns.viewmodels.CompassViewModel;
+
+import static androidx.core.content.ContextCompat.startActivity;
 
 public class CompassActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -122,6 +125,16 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
                 ((TextView)findViewById(R.id.label_compass_stopname)).setText(name);
             }
         });
+        viewModel.getStopReached().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean reached) {
+                if (reached) stopReached();
+            }
+        });
+    }
+
+    private void stopReached() {
+        startActivity(new Intent(this, QrActivity.class));
     }
 
     @Override

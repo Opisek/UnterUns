@@ -36,7 +36,7 @@ public class RouteQrViewModel extends QrViewModel {
         if (!(qr instanceof RouteQrModel)) return; // not a box code
         if (((RouteQrModel)qr).location != myStop.location) return; // wrong box
         setToastMessage("box found! :D");
-        switch (myStop.riddle) {
+        switch (myStop.riddle) { // put this in QrActivity?
             case POSTCARDS:
                 break;
             default:
