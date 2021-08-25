@@ -1,19 +1,27 @@
 package net.opisek.unteruns.views;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import net.opisek.unteruns.R;
+import net.opisek.unteruns.repositories.GpsRepository;
 import net.opisek.unteruns.viewmodels.CompassViewModel;
 
 public class CompassActivity extends AppCompatActivity implements SensorEventListener {
@@ -55,23 +63,65 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compass);
+        setTitle("Kompass");
 
         desiredRotation = 0f;
         currentRotation = 0f;
 
         compass = findViewById(R.id.compass_image);
 
+        sensorManager = (SensorManager)getApplicationContext().getSystemService(SENSOR_SERVICE);
+
+        checkLocationPerms();
+    }
+
+    int pendingRequest;
+
+    private void checkLocationPerms() {
+        String perms = Manifest.permission.ACCESS_FINE_LOCATION;
+        int val = getApplicationContext().checkCallingOrSelfPermission(perms);
+        if (val == PackageManager.PERMISSION_GRANTED) {
+            startGps();
+        } else {
+            pendingRequest = (int)(System.currentTimeMillis()/1000);
+            ActivityCompat.requestPermissions(CompassActivity.this, new String[] {perms}, pendingRequest);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode != pendingRequest) return;
+        checkLocationPerms();
+    }
+
+    private void startGps() {
+        LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        if (getApplicationContext().checkCallingOrSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, GpsRepository.getInstance());
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, GpsRepository.getInstance());
+        }
+
         viewModel = ViewModelProviders.of(this).get(CompassViewModel.class);
 
         bearing = 0f;
-        viewModel.getCompassRotation().observe(this, new Observer<Float>() {
+        viewModel.getBearing().observe(this, new Observer<Float>() {
             @Override
             public void onChanged(Float rotation) {
                 bearing = rotation;
             }
         });
-
-        sensorManager = (SensorManager)getApplicationContext().getSystemService(SENSOR_SERVICE);
+        viewModel.getDistanceWaypoint().observe(this, new Observer<Float>() {
+            @Override
+            public void onChanged(Float distance) {
+                ((TextView)findViewById(R.id.label_compass_distance)).setText(Math.round(distance) + " Meter");
+            }
+        });
+        viewModel.getNameStop().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String name) {
+                ((TextView)findViewById(R.id.label_compass_stopname)).setText(name);
+            }
+        });
     }
 
     @Override

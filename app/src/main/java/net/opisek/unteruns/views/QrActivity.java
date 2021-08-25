@@ -37,16 +37,16 @@ public class QrActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr);
+        setTitle("QR Scanner");
         viewModel = ViewModelProviders.of(this).get(RouteQrViewModel.class);
 
         // toasts
-        final Observer<Pair<String, Long>> toastObserver = new Observer<Pair<String, Long>>() {
+        ((RouteQrViewModel)viewModel).getToastMessage().observe(this, new Observer<Pair<String, Long>>() {
             @Override
-            public void onChanged(@Nullable final Pair<String, Long> toast) {
+            public void onChanged(Pair<String, Long> toast) {
                 Toast.makeText(QrActivity.this, toast.first, Toast.LENGTH_SHORT).show();
             }
-        };
-        ((RouteQrViewModel)viewModel).getToastMessage().observe(this, toastObserver);
+        });
 
         // qr scanner
         scannerView = findViewById(R.id.scanner_view);

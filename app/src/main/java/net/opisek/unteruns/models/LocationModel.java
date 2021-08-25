@@ -11,7 +11,7 @@ public class LocationModel {
         this(id, null, longitude, latitude);
     }
 
-    public LocationModel(String id, String name, double longitude, double latitude) {
+    public LocationModel(String id, String name, double latitude, double longitude) {
         this.id = id;
         this.name = name;
         location = new Location("");

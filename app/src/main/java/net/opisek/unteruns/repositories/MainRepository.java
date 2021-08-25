@@ -4,7 +4,6 @@ import android.util.Pair;
 
 import androidx.lifecycle.MutableLiveData;
 
-import net.opisek.unteruns.models.GpsModel;
 import net.opisek.unteruns.models.LocationModel;
 import net.opisek.unteruns.models.QrModel;
 import net.opisek.unteruns.models.RouteModel;
@@ -14,8 +13,6 @@ import net.opisek.unteruns.models.WaypointModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Set;
-import java.util.SortedMap;
 import java.util.UUID;
 
 public class MainRepository {
@@ -34,15 +31,6 @@ public class MainRepository {
         initializeQrCodes();
     }
 
-    // COMPASS
-
-    private MutableLiveData<Float> compassRotation;
-
-    public MutableLiveData<Float> getCompassRotation() {
-        compassRotation = GpsModel.getInstance().getCompassRotation();
-        return compassRotation;
-    }
-
     // LOCATIONS
 
     private HashMap<String, LocationModel> locations;
@@ -52,12 +40,12 @@ public class MainRepository {
 
     private void initiateLocations() {
         locations = new HashMap<>();
-        addLocation(new LocationModel("eingang",    "Waldeingang",          48.651969645503144d, 11.767538939916697d));
-        addLocation(new LocationModel("kreuzung",   "Kreuzung",             48.655620681852994d, 11.768300862382462d));
-        addLocation(new LocationModel("koloman",    "Kapelle St. Koloman",  48.661686910045980d, 11.756360174609688d));
-        addLocation(new LocationModel("see",        "Kleiner See",          48.667600660245240d, 11.765604095755492d));
-        addLocation(new LocationModel("kapellchen","Kleines Kapellchen",  48.660858476010720d, 11.771331706837545d));
-        addLocation(new LocationModel("ggm",        "GGM",                  48.649638113113600d, 11.769270510916570d));
+        addLocation(new LocationModel("eingang",    "Waldeingang",                      48.651969645503144d, 11.767538939916697d));
+        addLocation(new LocationModel("kreuzung",   "Kreuzung",                         48.655620681852994d, 11.768300862382462d));
+        addLocation(new LocationModel("koloman",    "Kapelle St. Koloman",              48.661686910045980d, 11.756360174609688d));
+        addLocation(new LocationModel("see",        "Kleiner See",                      48.667600660245240d, 11.765604095755492d));
+        addLocation(new LocationModel("kapellchen","Kleines Kapellchen",                48.660858476010720d, 11.771331706837545d));
+        addLocation(new LocationModel("ggm",        "Gabelsberger Gymnasium Mainburg",  48.649638113113600d, 11.769270510916570d));
 
         addLocation(new LocationModel("eingang-kreuzung-1",48.655620681852994d, 11.768300862382462d));
     }
@@ -118,7 +106,7 @@ public class MainRepository {
     public boolean pickRoute(String name) {
         if (!routes.containsKey(name)) return false;
         route = routes.get(name);
-        routeProgress = 0;
+        routeProgress = -1;
         return true;
     }
 
@@ -139,6 +127,7 @@ public class MainRepository {
     }
 
     public WaypointModel currentStop() {
+        if (routeProgress == -1) return null;
         return route.waypoints[routeProgress];
     }
 
