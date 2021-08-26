@@ -12,7 +12,7 @@
         android:layout_weight="1"
         android:background="@color/colorPrimary"
         android:gravity="center"
-        android:text="@string/title_activity_compass"
+        android:text="@string/title_compass"
         android:textAlignment="center"
         android:textColor="@color/colorForegroundLight"
         android:textSize="25sp" />
@@ -59,14 +59,14 @@
                 android:layout_weight="10"
                 android:padding="20dp"
                 android:rotation="0"
-                android:src="@drawable/compass" />
+                android:src="@drawable/compass"/>
 
             <ImageView
                 android:id="@+id/needle_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="20dp"
-                app:srcCompat="@drawable/needle" />
+                app:srcCompat="@drawable/needle"/>
         </FrameLayout>
     </LinearLayout>
 </LinearLayout>

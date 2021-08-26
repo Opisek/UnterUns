@@ -23,26 +23,32 @@ public class CompassViewModel extends ViewModel {
 
     private long activityStartTimestamp;
 
+    private boolean compassActive;
+
     public CompassViewModel() {
         activityStartTimestamp = System.currentTimeMillis();
 
         mainRepository = MainRepository.getInstance();
-        nextWaypoint = mainRepository.nextWaypoint();
-        nextStop = mainRepository.nextStop();
+        nextWaypoint = mainRepository.nextWaypoint(); // clear?
+        nextStop = mainRepository.nextStop(); // clear?
 
+        compassActive = true;
         gpsRepository = GpsRepository.getInstance();
         gpsRepository.setGpsListener(new GpsRepository.GpsListener() {
             @Override
             public void onGpsUpdated() {
-                getBearing().setValue(gpsRepository.getBearing(nextWaypoint.location.location));
-                getDistanceWaypoint().setValue(gpsRepository.getDistance(nextWaypoint.location.location));
+                if (compassActive) {
+                    getBearing().setValue(gpsRepository.getBearing(nextWaypoint.location.location));
+                    getDistanceWaypoint().setValue(gpsRepository.getDistance(nextWaypoint.location.location));
 
-                if (getDistanceWaypoint().getValue() <= 3f && System.currentTimeMillis() - activityStartTimestamp > 1000) {
-                    mainRepository.reachedWaypoint();
-                    if (nextWaypoint == nextStop) {
-                        getStopReached().setValue(true);
-                    } else {
-                        nextWaypoint = mainRepository.nextWaypoint();
+                    if (getDistanceWaypoint().getValue() <= 3f && System.currentTimeMillis() - activityStartTimestamp > 1000) {
+                        mainRepository.reachedWaypoint();
+                        if (nextWaypoint == nextStop) {
+                            getStopReached().setValue(true);
+                            compassActive = false;
+                        } else {
+                            nextWaypoint = mainRepository.nextWaypoint();
+                        }
                     }
                 }
             }

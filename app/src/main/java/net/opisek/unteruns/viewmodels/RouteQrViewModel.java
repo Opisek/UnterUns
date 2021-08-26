@@ -24,21 +24,23 @@ public class RouteQrViewModel extends QrViewModel {
 
     public RouteQrViewModel() {
         activityStartTimestamp = System.currentTimeMillis();
-
         mainRepository = MainRepository.getInstance();
-        myStop = mainRepository.currentStop();
-
         gpsRepository = GpsRepository.getInstance();
+
+        myStop = mainRepository.currentStop();
+        getRiddle().setValue(null);
+        getLostWaypoint().setValue(false);
+
         gpsRepository.setGpsListener(new GpsRepository.GpsListener() {
             @Override
             public void onGpsUpdated() {
                 if (gpsRepository.getDistance(myStop.location.location) >= 15f && System.currentTimeMillis() - activityStartTimestamp > 1000) {
+                    //Log.v("RouteQrViewModel", myStop.location.name);
                     mainRepository.lostWaypoint();
                     lostWaypoint.setValue(true);
                 }
             }
         });
-        Log.v("Halo", myStop.location.name);
     }
 
     private MutableLiveData<Boolean> lostWaypoint;
@@ -59,7 +61,7 @@ public class RouteQrViewModel extends QrViewModel {
     @Override
     public void onQrScan(QrModel qr) {
         if (!(qr instanceof RouteQrModel)) return; // not a box code
-        if (((RouteQrModel)qr).location != myStop.location) return; // wrong box
+        if (!((RouteQrModel)qr).location.id.equals(myStop.location.id)) return; // wrong box
         riddle.setValue(myStop.riddle);
     }
 }

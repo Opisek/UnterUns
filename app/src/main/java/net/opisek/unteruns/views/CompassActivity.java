@@ -11,22 +11,24 @@ import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import net.opisek.unteruns.R;
 import net.opisek.unteruns.repositories.GpsRepository;
 import net.opisek.unteruns.viewmodels.CompassViewModel;
-
-import static androidx.core.content.ContextCompat.startActivity;
 
 public class CompassActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -95,34 +97,28 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
 
         sensorManager = (SensorManager)getApplicationContext().getSystemService(SENSOR_SERVICE);
 
-        checkLocationPerms();
+        checkLocPerms();
     }
 
-    int pendingRequest;
-
-    private void checkLocationPerms() {
-        String perms = Manifest.permission.ACCESS_FINE_LOCATION;
-        int val = getApplicationContext().checkCallingOrSelfPermission(perms);
-        if (val == PackageManager.PERMISSION_GRANTED) {
-            startGps();
+    private void checkLocPerms() {
+        final String perms = Manifest.permission.ACCESS_FINE_LOCATION;
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), perms) == PackageManager.PERMISSION_GRANTED) {
+            permsPassed();
         } else {
-            pendingRequest = (int)(System.currentTimeMillis()/1000);
-            ActivityCompat.requestPermissions(CompassActivity.this, new String[] {perms}, pendingRequest);
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), new ActivityResultCallback<Boolean>() {
+                @Override
+                public void onActivityResult(Boolean result) {
+                    checkLocPerms();
+                }
+            }).launch(perms);
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode != pendingRequest) return;
-        checkLocationPerms();
-    }
-
-    private void startGps() {
+    @SuppressWarnings({"MissingPermission"})
+    private void permsPassed() {
         LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        if (getApplicationContext().checkCallingOrSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, GpsRepository.getInstance());
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, GpsRepository.getInstance());
-        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, GpsRepository.getInstance());
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, GpsRepository.getInstance());
 
         viewModel = ViewModelProviders.of(this).get(CompassViewModel.class);
 
@@ -157,7 +153,9 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
     private void stopReached() {
         Intent intent = new Intent(this, QrActivity.class);
         intent.putExtra("type", QrActivity.QrType.ROUTE);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
+        this.finish();
     }
 
     @Override
@@ -196,4 +194,25 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {}
 
+    private void mainMenu() {
+        Intent intent = new Intent(this, MenuActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        this.finish();
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            BackDialog dialog = new BackDialog();
+            dialog.setBackListener(new BackDialog.BackListener() {
+                @Override
+                public void onUserResponse(Boolean result) {
+                    if (result) mainMenu();
+                }
+            });
+            dialog.show(getSupportFragmentManager(), "Back Dialog");
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

@@ -24,7 +24,7 @@ public class TestQrViewModel extends QrViewModel {
         String desc;
         if ((qr instanceof RouteQrModel)) {
             String name = ((RouteQrModel)qr).location.name;
-            desc = "Route QR: " + ((RouteQrModel)qr).location.id + (name == null ? "" : " / " + ((RouteQrModel)qr).location.name);
+            desc = "Route QR: " + ((RouteQrModel)qr).location.name;
         } else if ((qr instanceof MorseQrModel)) {
             desc = "Morse QR: " + ((MorseQrModel)qr).text;
         } else {

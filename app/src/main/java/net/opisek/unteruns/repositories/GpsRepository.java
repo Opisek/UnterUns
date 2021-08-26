@@ -48,12 +48,12 @@ public class GpsRepository implements LocationListener {
 
     public float getDistance(Location l1, Location l2) {
         if (l1 == null || l2 == null) return 0f;
+        //Log.v("gps", "lat1=" + l1.getLatitude() + " lat2=" + l2.getLatitude() + " lon1=" + l1.getLongitude() + " lon2=" + l2.getLongitude());
         return l1.distanceTo(l2);
     }
 
     @Override
     public void onLocationChanged(Location loc) {
-        //Log.v(TAG, "IN ON LOCATION CHANGE, lat=" + loc.getLatitude() + ", lon=" + loc.getLongitude());
         currentLocation = loc;
         if (listener != null) listener.onGpsUpdated();
     }

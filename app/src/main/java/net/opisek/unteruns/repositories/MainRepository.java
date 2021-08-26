@@ -1,5 +1,6 @@
 package net.opisek.unteruns.repositories;
 
+import android.util.Log;
 import android.util.Pair;
 
 import net.opisek.unteruns.models.LocationModel;
@@ -67,7 +68,7 @@ public class MainRepository {
                                 new WaypointModel(getLocation("eingang")),
                                 new WaypointModel(getLocation("koloman")),
                                 new WaypointModel(getLocation("kapellchen"), Riddle.POSTCARDS),
-                                new WaypointModel(getLocation("ggm"))
+                                new WaypointModel(getLocation("ggm"), Riddle.FINAL)
                         }
                 )
         );
@@ -81,7 +82,7 @@ public class MainRepository {
                             new WaypointModel(getLocation("koloman")),
                             new WaypointModel(getLocation("see")),
                             new WaypointModel(getLocation("kapellchen"), Riddle.POSTCARDS),
-                            new WaypointModel(getLocation("ggm"))
+                            new WaypointModel(getLocation("ggm"), Riddle.FINAL)
                         }
                 )
         );
@@ -124,6 +125,7 @@ public class MainRepository {
 
     public WaypointModel currentStop() {
         if (routeProgress == -1) return null;
+        //Log.v("repository", route.waypoints[routeProgress].location.name);
         return route.waypoints[routeProgress];
     }
 
@@ -160,7 +162,7 @@ public class MainRepository {
         addQrCode(new RouteQrModel("6e40c051-df1f-4964-b77d-647c1d02265e", getLocation("kreuzung")));
         addQrCode(new RouteQrModel("d47bac64-3020-4a25-a5d6-1b781ac07d8a", getLocation("koloman")));
         addQrCode(new RouteQrModel("11558407-bcd0-4dd0-9bf8-a2766f750a08", getLocation("see")));
-        addQrCode(new RouteQrModel("a7eecb31-a434-4bdb-b1ea-615193db4921", getLocation("kappellchen")));
+        addQrCode(new RouteQrModel("a7eecb31-a434-4bdb-b1ea-615193db4921", getLocation("kapellchen")));
         addQrCode(new RouteQrModel("ba02ab0e-aa12-456a-b1d0-912341590b6d", getLocation("ggm")));
     }
 
@@ -172,6 +174,7 @@ public class MainRepository {
 
     public enum Riddle {
         NONE,
-        POSTCARDS
+        POSTCARDS,
+        FINAL
     }
 }

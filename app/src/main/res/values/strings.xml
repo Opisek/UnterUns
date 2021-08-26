@@ -3,7 +3,7 @@
 
     <!-- Menu -->
 
-    <string name="title_activity_menu">Willkommen in der Unter Uns App!</string>
+    <string name="title_menu">Willkommen in der Unter Uns App!</string>
 
     <string name="button_menu_start">Spiel Starten</string>
     <string name="button_menu_continue">Spiel Fortsetzen</string>
@@ -11,20 +11,27 @@
 
     <!-- Routes -->
 
-    <string name="title_activity_routes">Wählen Sie die Schwierigkeitsstufe.</string>
+    <string name="title_routes">Wählen Sie die Schwierigkeitsstufe.</string>
 
     <!-- Credits -->
 
-    <string name="title_activity_credits">Die Ersteller von dem Unter Uns Geocaching Erlebnis.</string>
+    <string name="title_credits">Die Ersteller von dem Unter Uns Geocaching Erlebnis.</string>
+
+    <!-- Back Dialog -->
+
+    <string name="title_back">Achtung</string>
+    <string name="description_back">Wollen Sie wirklich in das Hauptmenü zurück?\nIhr derzeitige Progress wird nicht gespeicher!</string>
+    <string name="button_back_yes">Hauptmenü</string>
+    <string name="button_back_no">Nein</string>
 
     <!-- Compass -->
 
-    <string name="title_activity_compass">Folgen Sie dem Kompass, um ans nächste Ziel zu gelangen.</string>
+    <string name="title_compass">Folgen Sie dem Kompass, um ans nächste Ziel zu gelangen.</string>
 
     <!-- QR -->
 
-    <string name="title_activity_qr_route">Scannen Sie den QR Code, um fortzufolgen.</string>
-    <string name="title_activity_qr_continue">Scannen Sie den letzten QR Code, um dort wieder anzufangen.</string>
+    <string name="title_qr_route">Scannen Sie den QR Code, um fortzufolgen.</string>
+    <string name="title_qr_continue">Scannen Sie den letzten QR Code, um dort wieder anzufangen.</string>
 
     <!-- Lorem Ipsum -->
 
