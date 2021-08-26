@@ -15,11 +15,11 @@ import static androidx.core.content.ContextCompat.startActivity;
 
 public class CompassViewModel extends ViewModel {
 
-    MainRepository mainRepository;
-    GpsRepository gpsRepository;
+    private MainRepository mainRepository;
+    private GpsRepository gpsRepository;
 
-    WaypointModel nextWaypoint;
-    WaypointModel nextStop;
+    private WaypointModel nextWaypoint;
+    private WaypointModel nextStop;
 
     private long activityStartTimestamp;
 

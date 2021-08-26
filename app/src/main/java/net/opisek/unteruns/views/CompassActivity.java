@@ -10,6 +10,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
@@ -52,7 +53,7 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
             float orientation[] = new float[3];
             SensorManager.getOrientation(R, orientation);
             desiredRotation = (float)Math.toDegrees(orientation[0]);
-            desiredRotation = (desiredRotation+360)%360;
+            desiredRotation = desiredRotation % 360f;
 
             Animation anim = new RotateAnimation(-currentRotation,-desiredRotation, Animation.RELATIVE_TO_SELF,.5f,Animation.RELATIVE_TO_SELF,.5f);
             currentRotation = desiredRotation;
@@ -66,7 +67,8 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
     }
 
     private void setNeedleRotation() {
-        desiredNeedleRotation = bearing + currentRotation;
+        desiredNeedleRotation = currentRotation + (bearing * -1f);
+        desiredNeedleRotation = desiredNeedleRotation % 360f;
 
         Animation anim = new RotateAnimation(-currentNeedleRotation,-desiredNeedleRotation, Animation.RELATIVE_TO_SELF,.5f,Animation.RELATIVE_TO_SELF,.5f);
         currentNeedleRotation = desiredNeedleRotation;
@@ -129,6 +131,7 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
             @Override
             public void onChanged(Float rotation) {
                 bearing = rotation;
+                setNeedleRotation();
             }
         });
         viewModel.getDistanceWaypoint().observe(this, new Observer<Float>() {

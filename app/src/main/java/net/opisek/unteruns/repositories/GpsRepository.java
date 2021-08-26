@@ -39,7 +39,7 @@ public class GpsRepository implements LocationListener {
 
     public float getBearing(Location l1, Location l2) {
         if (l1 == null || l2 == null) return 0f;
-        return l1.distanceTo(l2);
+        return l1.bearingTo(l2);
     }
 
     public float getDistance(Location l1) {
@@ -48,7 +48,6 @@ public class GpsRepository implements LocationListener {
 
     public float getDistance(Location l1, Location l2) {
         if (l1 == null || l2 == null) return 0f;
-        Log.v(TAG, "DISTANCE, lat1=" + l1.getLatitude() + " lat2=" + l2.getLatitude() + " lon1=" + l1.getLongitude() + " lon2=" + l2.getLongitude());
         return l1.distanceTo(l2);
     }
 

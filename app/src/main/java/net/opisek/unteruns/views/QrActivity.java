@@ -63,6 +63,12 @@ public class QrActivity extends AppCompatActivity {
                 title.setText(R.string.title_activity_qr_route);
                 viewModel = ViewModelProviders.of(this).get(RouteQrViewModel.class);
                 observerRiddle(((RouteQrViewModel)viewModel).getRiddle());
+                ((RouteQrViewModel)viewModel).getLostWaypoint().observe(this, new Observer<Boolean>() {
+                    @Override
+                    public void onChanged(Boolean isLost) {
+                        if (isLost) lostWaypoint();
+                    }
+                });
                 break;
             case CONTINUE:
                 title.setText(R.string.title_activity_qr_continue);
@@ -148,5 +154,9 @@ public class QrActivity extends AppCompatActivity {
         Toast toastt = Toast.makeText(this, toast, Toast.LENGTH_LONG);
         toastt.setGravity(Gravity.BOTTOM,0,40);
         toastt.show();
+    }
+
+    private void lostWaypoint() {
+        startActivity(new Intent(this, CompassActivity.class));
     }
 }
