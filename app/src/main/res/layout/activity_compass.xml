@@ -15,7 +15,8 @@
         android:text="@string/title_compass"
         android:textAlignment="center"
         android:textColor="@color/colorForegroundLight"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:padding="5dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +35,7 @@
             android:text=""
             android:textAlignment="center"
             android:textColor="@color/colorForegroundLight"
-            android:textSize="25sp" />
+            android:textSize="25sp"/>
 
         <TextView
             android:id="@+id/label_compass_distance"
@@ -45,7 +46,7 @@
             android:text=""
             android:textAlignment="center"
             android:textColor="@color/colorForegroundLight"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
 
         <FrameLayout
             android:layout_width="match_parent"

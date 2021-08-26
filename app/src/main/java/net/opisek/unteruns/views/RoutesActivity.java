@@ -54,6 +54,8 @@ public class RoutesActivity extends AppCompatActivity {
             button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
             button.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorForegroundLight));
             button.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBackgroundDark));
+            int pad = (int)dpToPx(5f);
+            button.setPadding(pad, pad, pad, pad);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f);
             params.setMargins(0, 0, 0, (int)dpToPx(10f));
@@ -79,10 +81,13 @@ public class RoutesActivity extends AppCompatActivity {
 
     private void onPicked() {
         if (myState == GameState.NEW) {
-            startActivity(new Intent(this, CompassActivity.class));
+            Intent intent = new Intent(this, CompassActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivity(intent);
         } else {
             Intent intent = new Intent(this, QrActivity.class);
             intent.putExtra("type", QrActivity.QrType.CONTINUE);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(intent);
         }
     }

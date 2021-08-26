@@ -4,6 +4,8 @@ import android.util.Log;
 import android.util.Pair;
 
 import net.opisek.unteruns.models.LocationModel;
+import net.opisek.unteruns.models.MorseModel;
+import net.opisek.unteruns.models.MorseQrModel;
 import net.opisek.unteruns.models.QrModel;
 import net.opisek.unteruns.models.RouteModel;
 import net.opisek.unteruns.models.RouteQrModel;
@@ -14,8 +16,8 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class MainRepository {
-
-    // SINGLETON
+    //region                                                                        REPOSITORY
+    // ==============================================================================================================================================================================================
 
     private static MainRepository instance;
 
@@ -26,10 +28,14 @@ public class MainRepository {
     private MainRepository() {
         initiateLocations();
         initializeRoutes();
+        initializeMorseCodes();
         initializeQrCodes();
     }
 
-    // LOCATIONS
+    // ==============================================================================================================================================================================================
+    //endregion
+    //region                                                                        LOCATIONS
+    // ==============================================================================================================================================================================================
 
     private HashMap<String, LocationModel> locations;
     private void addLocation(LocationModel loc) {
@@ -52,7 +58,10 @@ public class MainRepository {
         return locations.get(id);
     }
 
-    // ROUTES
+    // ==============================================================================================================================================================================================
+    //endregion
+    //region                                                                        ROUTES
+    // ==============================================================================================================================================================================================
 
     private ArrayList<RouteModel> routes;
     private void addRoute(RouteModel route) {
@@ -64,10 +73,10 @@ public class MainRepository {
         addRoute(
                 new RouteModel("Leicht", "4 Stunden",
                         new WaypointModel[]{
-                                new WaypointModel(getLocation("ggm")),
+                                new WaypointModel(getLocation("ggm"), Riddle.POSTCARDS),
                                 new WaypointModel(getLocation("eingang")),
                                 new WaypointModel(getLocation("koloman")),
-                                new WaypointModel(getLocation("kapellchen"), Riddle.POSTCARDS),
+                                new WaypointModel(getLocation("kapellchen")),
                                 new WaypointModel(getLocation("ggm"), Riddle.FINAL)
                         }
                 )
@@ -149,7 +158,41 @@ public class MainRepository {
         routeProgress--;
     }
 
-    // QR CODES
+    // ==============================================================================================================================================================================================
+    //endregion
+    //region                                                                        MORSE
+    // ==============================================================================================================================================================================================
+
+    private HashMap<String, MorseModel> morseCodes;
+    private void addMorseCode(MorseModel morse) { morseCodes.put(morse.id, morse); }
+
+    private void initializeMorseCodes() {
+        morseCodes = new HashMap<>();
+
+        addMorseCode(new MorseModel("Frankfurt"));
+        addMorseCode(new MorseModel("London"));
+        addMorseCode(new MorseModel("Mainburg"));
+        addMorseCode(new MorseModel("Moskau"));
+        addMorseCode(new MorseModel("New York"));
+        addMorseCode(new MorseModel("Paris"));
+        addMorseCode(new MorseModel("Rio de Janeiro"));
+        addMorseCode(new MorseModel("Venedig"));
+        addMorseCode(new MorseModel("Zuerich"));
+
+        addMorseCode(new MorseModel("question1", "Was ist der hoechste Berg der Welt?"));
+        addMorseCode(new MorseModel("answer1", "Mount Everest"));
+        addMorseCode(new MorseModel("question2", "Was ist der vierte Planet in unserem Sonnensystem?"));
+        addMorseCode(new MorseModel("answer2", "Mars"));
+        addMorseCode(new MorseModel("question2", "Wer bringt am Weinachten Geschenke?"));
+        addMorseCode(new MorseModel("answer3", "Nikolaus"));
+    }
+
+    public MorseModel getMorseCode(String id) { return morseCodes.get(id); }
+
+    // ==============================================================================================================================================================================================
+    //endregion
+    //region                                                                        QR CODES
+    // ==============================================================================================================================================================================================
 
     private HashMap<UUID, QrModel> qrCodes;
     private void addQrCode(QrModel qr) {
@@ -158,23 +201,40 @@ public class MainRepository {
 
     private void initializeQrCodes() {
         qrCodes = new HashMap<>();
+
         addQrCode(new RouteQrModel("17064bd6-5ee2-4b52-b397-d4beac844307", getLocation("eingang")));
         addQrCode(new RouteQrModel("6e40c051-df1f-4964-b77d-647c1d02265e", getLocation("kreuzung")));
         addQrCode(new RouteQrModel("d47bac64-3020-4a25-a5d6-1b781ac07d8a", getLocation("koloman")));
         addQrCode(new RouteQrModel("11558407-bcd0-4dd0-9bf8-a2766f750a08", getLocation("see")));
         addQrCode(new RouteQrModel("a7eecb31-a434-4bdb-b1ea-615193db4921", getLocation("kapellchen")));
         addQrCode(new RouteQrModel("ba02ab0e-aa12-456a-b1d0-912341590b6d", getLocation("ggm")));
+
+        addQrCode(new MorseQrModel("63b6c8e4-3ac2-4db0-bcd3-ac0dfd695142", getMorseCode("frankfurt")));
+        addQrCode(new MorseQrModel("f0b390db-5ddc-4b00-8a1a-872011d9eb43", getMorseCode("london")));
+        addQrCode(new MorseQrModel("92b2d14e-522c-49c9-9065-b8f694eb8722", getMorseCode("mainburg")));
+        addQrCode(new MorseQrModel("9feba8b8-516f-4d63-a72a-d2b4ace98fa2", getMorseCode("moskau")));
+        addQrCode(new MorseQrModel("2c08dfff-b5e5-49d5-b801-cd98c91f5ee3", getMorseCode("new-york")));
+        addQrCode(new MorseQrModel("a28d4e2d-e654-4257-bab2-dbb267694470", getMorseCode("paris")));
+        addQrCode(new MorseQrModel("707de83f-b25b-4d8b-b545-25e80e8001e0", getMorseCode("rio-de-janeiro")));
+        addQrCode(new MorseQrModel("96a2af77-8f53-44ca-ac3b-d657948e8ee8", getMorseCode("venedig")));
+        addQrCode(new MorseQrModel("ab55b93c-a03e-46de-908e-eb0afd0f557c", getMorseCode("zuerich")));
     }
 
     public QrModel getQrCode(String id) {
         return qrCodes.get(UUID.fromString(id));
     }
 
-    // RIDDLES
+    // ==============================================================================================================================================================================================
+    //endregion
+    //region                                                                        RIDDLES
+    // ==============================================================================================================================================================================================
 
     public enum Riddle {
         NONE,
         POSTCARDS,
         FINAL
     }
+
+    // ==============================================================================================================================================================================================
+    //endregion
 }

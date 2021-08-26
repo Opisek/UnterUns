@@ -21,19 +21,16 @@ public class MenuActivity extends AppCompatActivity {
                 startGame();
             }
         });
-
         findViewById(R.id.button_menu_continue).setOnClickListener(new View.OnClickListener(){
             @Override public void onClick(View v) {
                 continueGame();
             }
         });
-
         findViewById(R.id.button_menu_credits).setOnClickListener(new View.OnClickListener(){
             @Override public void onClick(View v) {
                 showCredits();
             }
         });
-
         findViewById(R.id.button_menu_qr).setOnClickListener(new View.OnClickListener(){
             @Override public void onClick(View v) {
                 qrInterpreter();
@@ -58,16 +55,5 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this, QrActivity.class);
         intent.putExtra("type", QrActivity.QrType.TEST);
         startActivity(intent);
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 }

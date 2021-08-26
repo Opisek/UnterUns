@@ -3,10 +3,10 @@ package net.opisek.unteruns.models;
 import java.util.UUID;
 
 public class MorseQrModel extends QrModel {
-    public final String text;
+    public final MorseModel morse;
 
-    public MorseQrModel(String id, String text) {
+    public MorseQrModel(String id, MorseModel morse) {
         super(id);
-        this.text = text;
+        this.morse = morse;
     }
 }

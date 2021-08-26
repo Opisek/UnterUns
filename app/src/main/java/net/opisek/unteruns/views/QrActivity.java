@@ -1,16 +1,21 @@
 package net.opisek.unteruns.views;
 
 import android.Manifest;
+import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -28,12 +33,16 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 
 import net.opisek.unteruns.R;
+import net.opisek.unteruns.models.MorseQrModel;
 import net.opisek.unteruns.repositories.GpsRepository;
 import net.opisek.unteruns.repositories.MainRepository;
 import net.opisek.unteruns.viewmodels.ContinueQrViewModel;
+import net.opisek.unteruns.viewmodels.MorseQrViewModel;
 import net.opisek.unteruns.viewmodels.QrViewModel;
 import net.opisek.unteruns.viewmodels.RouteQrViewModel;
 import net.opisek.unteruns.viewmodels.TestQrViewModel;
+
+import java.util.List;
 
 public class QrActivity extends AppCompatActivity {
 
@@ -41,7 +50,7 @@ public class QrActivity extends AppCompatActivity {
         ROUTE,
         CONTINUE,
         TEST,
-        POSTCARDS
+        MORSE
     }
     private QrType myQrType;
 
@@ -51,6 +60,7 @@ public class QrActivity extends AppCompatActivity {
     private CodeScannerView scannerView;
 
     private boolean camDisabled;
+    private boolean hasParent;
 
     // https://github.com/yuriy-budiyev/code-scanner
 
@@ -60,6 +70,8 @@ public class QrActivity extends AppCompatActivity {
         setContentView(R.layout.activity_qr);
 
         myQrType = (QrType)getIntent().getExtras().getSerializable("type");
+
+        hasParent = false;
 
         // qr scanner
         scannerView = findViewById(R.id.scanner_view);
@@ -137,7 +149,7 @@ public class QrActivity extends AppCompatActivity {
                 observerRiddle(((ContinueQrViewModel)viewModel).getRiddle());
                 break;
             case TEST:
-                title.setText("QR Tester");
+                title.setText(R.string.title_qr_test);
                 viewModel = ViewModelProviders.of(this).get(TestQrViewModel.class);
                 ((TestQrViewModel)viewModel).getToast().observe(this, new Observer<Pair<String, Long>>() {
                     @Override
@@ -145,6 +157,14 @@ public class QrActivity extends AppCompatActivity {
                         makeToast(toast.first);
                     }
                 });
+                hasParent = true;
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                break;
+            case MORSE:
+                title.setText(R.string.title_qr_morse);
+                viewModel = ViewModelProviders.of(this).get(MorseQrViewModel.class);
+                hasParent = true;
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 break;
         }
 
@@ -182,14 +202,17 @@ public class QrActivity extends AppCompatActivity {
         scanner.stopPreview();
         scanner.releaseResources();
         //Log.v("qr", "BIN ANGEKOMMEN!");
+        Intent intent;
         switch(riddle) {
             case POSTCARDS:
+                intent = new Intent(this, PostcardsActivity.class);
                 break;
             default:
-                Intent intent = new Intent(this, CompassActivity.class);
+                intent = new Intent(this, CompassActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                startActivity(intent);
+
         }
+        startActivity(intent);
         this.finish();
     }
 
@@ -210,6 +233,29 @@ public class QrActivity extends AppCompatActivity {
         this.finish();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            /*if (myQrType.equals(QrType.MORSE)) {
+                Intent intent = new Intent(this, PostcardsActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+                this.finish();
+                return true;
+            }
+            else if (myQrType.equals(QrType.TEST)) {
+                Intent intent = new Intent(this, MenuActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+                this.finish();
+                return true;
+            }*/
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void mainMenu() {
         Intent intent = new Intent(this, MenuActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -219,15 +265,20 @@ public class QrActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            BackDialog dialog = new BackDialog();
-            dialog.setBackListener(new BackDialog.BackListener() {
-                @Override
-                public void onUserResponse(Boolean result) {
-                    if (result) mainMenu();
-                }
-            });
-            dialog.show(getSupportFragmentManager(), "Back Dialog");
-            return true;
+            if (hasParent) {
+                this.finish();
+                return true;
+            } else {
+                BackDialog dialog = new BackDialog();
+                dialog.setBackListener(new BackDialog.BackListener() {
+                    @Override
+                    public void onUserResponse(Boolean result) {
+                        if (result) mainMenu();
+                    }
+                });
+                dialog.show(getSupportFragmentManager(), "Back Dialog");
+                return true;
+            }
         }
         return super.onKeyDown(keyCode, event);
     }

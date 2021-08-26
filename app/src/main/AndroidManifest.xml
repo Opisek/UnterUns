@@ -40,6 +40,15 @@
             android:name=".views.QrActivity"
             android:label="Qr Scanner">
         </activity>
+        <activity
+            android:name=".views.PostcardsActivity"
+            android:label="Postkarten Rätsel">
+        </activity>
+        <activity
+            android:name=".views.PostcardQuestionsActivity"
+            android:label="Postkarten Rätsel"
+            android:parentActivityName=".views.PostcardsActivity">
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>

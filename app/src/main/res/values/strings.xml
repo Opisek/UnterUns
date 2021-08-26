@@ -32,6 +32,14 @@
 
     <string name="title_qr_route">Scannen Sie den QR Code, um fortzufolgen.</string>
     <string name="title_qr_continue">Scannen Sie den letzten QR Code, um dort wieder anzufangen.</string>
+    <string name="title_qr_test">QR Tester</string>
+    <string name="title_qr_morse">Scannen Sie den entsprechenden QR Code, um eine Geheimnachricht anzuhören.</string>
+
+    <!-- Postcards -->
+
+    <string name="title_postcards">Lösen Sie das Postkarten Rätsel, um weiterzukommen.</string>
+    <string name="button_postcards_scan">QR Scannen</string>
+    <string name="button_postcards_questions">Fragen Beantworten</string>
 
     <!-- Lorem Ipsum -->
 
