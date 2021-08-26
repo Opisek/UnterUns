@@ -31,12 +31,15 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
 
     private CompassViewModel viewModel;
     private ImageView compass;
+    private ImageView needle;
 
     private float bearing;
 
     private SensorManager sensorManager;
     private float desiredRotation;
     private float currentRotation;
+    private float desiredNeedleRotation;
+    private float currentNeedleRotation;
 
     private float[] gravity = new float[3];
     private float[] geomagnetic = new float[3];
@@ -62,6 +65,19 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
         }
     }
 
+    private void setNeedleRotation() {
+        desiredNeedleRotation = bearing + currentRotation;
+
+        Animation anim = new RotateAnimation(-currentNeedleRotation,-desiredNeedleRotation, Animation.RELATIVE_TO_SELF,.5f,Animation.RELATIVE_TO_SELF,.5f);
+        currentNeedleRotation = desiredNeedleRotation;
+
+        anim.setDuration(500);
+        anim.setRepeatCount(0);
+        anim.setFillAfter(true);
+
+        needle.startAnimation(anim);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,8 +85,11 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
 
         desiredRotation = 0f;
         currentRotation = 0f;
+        desiredNeedleRotation = 0f;
+        currentNeedleRotation = 0f;
 
         compass = findViewById(R.id.compass_image);
+        needle = findViewById(R.id.needle_image);
 
         sensorManager = (SensorManager)getApplicationContext().getSystemService(SENSOR_SERVICE);
 
@@ -160,11 +179,13 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
                 gravity[1] = alpha * gravity[1] + (1-alpha)*event.values[1];
                 gravity[2] = alpha * gravity[2] + (1-alpha)*event.values[2];
                 setImageRotation();
+                setNeedleRotation();
             } else if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
                 geomagnetic[0] = alpha * geomagnetic[0] + (1-alpha)*event.values[0];
                 geomagnetic[1] = alpha * geomagnetic[1] + (1-alpha)*event.values[1];
                 geomagnetic[2] = alpha * geomagnetic[2] + (1-alpha)*event.values[2];
                 setImageRotation();
+                setNeedleRotation();
             }
         }
     }
