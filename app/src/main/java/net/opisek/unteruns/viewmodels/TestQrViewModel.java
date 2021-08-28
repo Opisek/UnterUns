@@ -11,6 +11,8 @@ import net.opisek.unteruns.models.RouteQrModel;
 import net.opisek.unteruns.models.WaypointModel;
 import net.opisek.unteruns.repositories.MainRepository;
 
+import java.util.Arrays;
+
 public class TestQrViewModel extends QrViewModel {
 
     private MutableLiveData<Pair<String, Long>> toast;
@@ -27,6 +29,7 @@ public class TestQrViewModel extends QrViewModel {
             desc = "Route QR: " + ((RouteQrModel)qr).location.name;
         } else if ((qr instanceof MorseQrModel)) {
             desc = "Morse QR: " + ((MorseQrModel)qr).morse.text;
+            //desc = "Morse QR: " + Arrays.toString(((MorseQrModel)qr).morse.morse);
         } else {
             desc = "Unknown QR";
         }

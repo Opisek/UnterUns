@@ -7,7 +7,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.media.AudioAttributes;
+import android.media.AudioFormat;
+import android.media.AudioManager;
+import android.media.AudioTrack;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Pair;
 import android.view.Gravity;
@@ -42,6 +50,7 @@ import net.opisek.unteruns.viewmodels.QrViewModel;
 import net.opisek.unteruns.viewmodels.RouteQrViewModel;
 import net.opisek.unteruns.viewmodels.TestQrViewModel;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class QrActivity extends AppCompatActivity {
@@ -60,6 +69,7 @@ public class QrActivity extends AppCompatActivity {
     private CodeScannerView scannerView;
 
     private boolean camDisabled;
+    private boolean soundDisabled;
     private boolean hasParent;
 
     // https://github.com/yuriy-budiyev/code-scanner
@@ -72,6 +82,7 @@ public class QrActivity extends AppCompatActivity {
         myQrType = (QrType)getIntent().getExtras().getSerializable("type");
 
         hasParent = false;
+        soundDisabled = false;
 
         // qr scanner
         scannerView = findViewById(R.id.scanner_view);
@@ -162,9 +173,35 @@ public class QrActivity extends AppCompatActivity {
                 break;
             case MORSE:
                 title.setText(R.string.title_qr_morse);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                setVolumeControlStream(AudioManager.STREAM_MUSIC);
                 viewModel = ViewModelProviders.of(this).get(MorseQrViewModel.class);
                 hasParent = true;
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+                final MediaPlayer[] sounds = new MediaPlayer[] {
+                    MediaPlayer.create(this, R.raw.morse_sound_short),
+                    MediaPlayer.create(this, R.raw.morse_sound_long),
+                    MediaPlayer.create(this, R.raw.morse_pause_short),
+                    MediaPlayer.create(this, R.raw.morse_pause_long)
+                };
+                final Handler handler = new Handler();
+                final Context context = getApplicationContext();
+                ((MorseQrViewModel)viewModel).getMorseSequence().observe(this, new Observer<Pair<int[], Integer>>() {
+                    @Override
+                    public void onChanged(final Pair<int[], Integer> morseSequence) {
+                        Log.v("QrActivity", "change");
+                        final Thread thread = new Thread(new Runnable() {
+                            public void run() {
+                                handler.post(new Runnable() {
+                                    public void run() {
+                                        playMorse(sounds, morseSequence.first, 0);
+                                    }
+                                });
+                            }
+                        });
+                        thread.start();
+                    }
+                });
                 break;
         }
 
@@ -172,10 +209,26 @@ public class QrActivity extends AppCompatActivity {
         scanner.startPreview();
     }
 
+    private void playMorse(final MediaPlayer[] sounds, final int[] seq, int i) {
+        if (i >= seq.length) ((MorseQrViewModel)viewModel).playbackFinished();
+        else {
+            MediaPlayer plr = sounds[seq[i++]];
+            final int newIndex = i;
+            plr.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    if (!soundDisabled) playMorse(sounds, seq, newIndex);
+                }
+            });
+            plr.start();
+        }
+    }
+
     @Override
     protected void onPause() {
         //Log.v("qr", "stop3");
         camDisabled = true;
+        soundDisabled = true;
         scanner.releaseResources();
         super.onPause();
     }
@@ -184,7 +237,8 @@ public class QrActivity extends AppCompatActivity {
     protected void onResume() {
         //Log.v("qr", "resume");
         camDisabled = false;
-        //scanner.startPreview();
+        soundDisabled = false;
+        scanner.startPreview();
         super.onResume();
     }
 
@@ -236,21 +290,8 @@ public class QrActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
+            soundDisabled = true;
             this.finish();
-            /*if (myQrType.equals(QrType.MORSE)) {
-                Intent intent = new Intent(this, PostcardsActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                startActivity(intent);
-                this.finish();
-                return true;
-            }
-            else if (myQrType.equals(QrType.TEST)) {
-                Intent intent = new Intent(this, MenuActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                startActivity(intent);
-                this.finish();
-                return true;
-            }*/
             return true;
         }
         return super.onOptionsItemSelected(item);

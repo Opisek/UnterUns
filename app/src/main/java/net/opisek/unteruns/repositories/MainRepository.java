@@ -29,6 +29,8 @@ public class MainRepository {
         initiateLocations();
         initializeRoutes();
         initializeMorseCodes();
+        initializeQuestions();
+        initializeAnswers();
         initializeQrCodes();
     }
 
@@ -179,15 +181,53 @@ public class MainRepository {
         addMorseCode(new MorseModel("Venedig"));
         addMorseCode(new MorseModel("Zuerich"));
 
-        addMorseCode(new MorseModel("question1", "Was ist der hoechste Berg der Welt?"));
+        //addMorseCode(new MorseModel("question1", "Was ist der hoechste Berg der Welt?"));
+        addMorseCode(new MorseModel("question1", "Hoechster Berg der Welt?"));
         addMorseCode(new MorseModel("answer1", "Mount Everest"));
-        addMorseCode(new MorseModel("question2", "Was ist der vierte Planet in unserem Sonnensystem?"));
+        //addMorseCode(new MorseModel("question2", "Was ist der vierte Planet in unserem Sonnensystem?"));
+        addMorseCode(new MorseModel("question2", "Vierter Planet im Sonnensystem?"));
         addMorseCode(new MorseModel("answer2", "Mars"));
-        addMorseCode(new MorseModel("question2", "Wer bringt am Weinachten Geschenke?"));
+        addMorseCode(new MorseModel("question3", "Wer bringt am Weinachten Geschenke?"));
         addMorseCode(new MorseModel("answer3", "Nikolaus"));
     }
 
     public MorseModel getMorseCode(String id) { return morseCodes.get(id); }
+
+    private MorseModel[] questions;
+    private int questionsIndex;
+    private void addQuestion(MorseModel q) { questions[++questionsIndex] = q; }
+
+    private void initializeQuestions() {
+        questions = new MorseModel[3];
+        questionsIndex = -1;
+        addQuestion(getMorseCode("question1"));
+        addQuestion(getMorseCode("question2"));
+        addQuestion(getMorseCode("question3"));
+    }
+
+    public MorseModel[] getQuestions() {
+        return questions;
+    }
+
+    public MorseModel getQuestion(int index) {
+        return questions[index];
+    }
+
+    private MorseModel[] answers;
+    private int answersIndex;
+    private void addAnswer(MorseModel a) { answers[++answersIndex] = a; }
+
+    private void initializeAnswers() {
+        answers = new MorseModel[3];
+        answersIndex = -1;
+        addAnswer(getMorseCode("answer1"));
+        addAnswer(getMorseCode("answer1"));
+        addAnswer(getMorseCode("answer1"));
+    }
+
+    public MorseModel getAnswer(int index) {
+        return answers[index];
+    }
 
     // ==============================================================================================================================================================================================
     //endregion
@@ -195,9 +235,7 @@ public class MainRepository {
     // ==============================================================================================================================================================================================
 
     private HashMap<UUID, QrModel> qrCodes;
-    private void addQrCode(QrModel qr) {
-        qrCodes.put(qr.id, qr);
-    }
+    private void addQrCode(QrModel qr) { qrCodes.put(qr.id, qr); }
 
     private void initializeQrCodes() {
         qrCodes = new HashMap<>();
@@ -213,7 +251,7 @@ public class MainRepository {
         addQrCode(new MorseQrModel("f0b390db-5ddc-4b00-8a1a-872011d9eb43", getMorseCode("london")));
         addQrCode(new MorseQrModel("92b2d14e-522c-49c9-9065-b8f694eb8722", getMorseCode("mainburg")));
         addQrCode(new MorseQrModel("9feba8b8-516f-4d63-a72a-d2b4ace98fa2", getMorseCode("moskau")));
-        addQrCode(new MorseQrModel("2c08dfff-b5e5-49d5-b801-cd98c91f5ee3", getMorseCode("new-york")));
+        addQrCode(new MorseQrModel("1c572510-049b-41e4-aa87-06862bbd9adb", getMorseCode("new-york")));
         addQrCode(new MorseQrModel("a28d4e2d-e654-4257-bab2-dbb267694470", getMorseCode("paris")));
         addQrCode(new MorseQrModel("707de83f-b25b-4d8b-b545-25e80e8001e0", getMorseCode("rio-de-janeiro")));
         addQrCode(new MorseQrModel("96a2af77-8f53-44ca-ac3b-d657948e8ee8", getMorseCode("venedig")));

@@ -7,7 +7,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0px"
         android:layout_weight="1"
-        android:text="@string/title_postcards"
+        android:text="@string/title_postcardquestions"
         android:textAlignment="center"
         android:gravity="center"
         android:textSize="25sp"
@@ -20,21 +20,7 @@
         android:layout_weight="3"
         android:orientation="vertical"
         android:paddingTop="100dp"
-        android:paddingBottom="100dp">
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="0px"
-            android:layout_weight="1"
-            android:layout_marginBottom="10dp"
-
-            android:id="@+id/TOBEREMOVEDLATER"
-
-            android:text="ICH BIN EIN NUTZLOSER KNOPF :D"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:textSize="25sp"
-            android:padding="5dp"
-            android:textColor="@color/colorForegroundLight"
-            android:background="@color/colorBackgroundDark"/>
+        android:paddingBottom="100dp"
+        android:id="@+id/linear_postcardquestions_buttons">
     </LinearLayout>
 </LinearLayout>

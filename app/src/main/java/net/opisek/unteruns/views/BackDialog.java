@@ -23,7 +23,7 @@ public class BackDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.title_back);
-        builder.setMessage(R.string.description_back);
+        builder.setMessage(R.string.label_back);
         builder.setPositiveButton(R.string.button_back_yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {

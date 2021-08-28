@@ -22,33 +22,5 @@
         android:paddingTop="100dp"
         android:paddingBottom="100dp"
         android:id="@+id/linear_routes_buttons">
-        <!--<Button
-            android:layout_width="fill_parent"
-            android:layout_height="0px"
-            android:layout_weight="1"
-            android:layout_marginBottom="10dp"
-
-            android:id="@+id/button_menu_start"
-
-            android:text="Leicht"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:textSize="25sp"
-            android:textColor="@color/colorForegroundLight"
-            android:background="@color/colorBackgroundDark"/>
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="0px"
-            android:layout_weight="1"
-            android:layout_marginBottom="10dp"
-
-            android:id="@+id/button_menu_continue"
-
-            android:text="Schwer"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:textSize="25sp"
-            android:textColor="@color/colorForegroundLight"
-            android:background="@color/colorBackgroundDark"/>-->
     </LinearLayout>
 </LinearLayout>

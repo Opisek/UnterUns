@@ -20,7 +20,7 @@
     <!-- Back Dialog -->
 
     <string name="title_back">Achtung</string>
-    <string name="description_back">Wollen Sie wirklich in das Hauptmenü zurück?\nIhr derzeitige Progress wird nicht gespeicher!</string>
+    <string name="label_back">Wollen Sie wirklich in das Hauptmenü zurück?\nIhr derzeitige Progress wird nicht gespeicher!</string>
     <string name="button_back_yes">Hauptmenü</string>
     <string name="button_back_no">Nein</string>
 
@@ -40,6 +40,15 @@
     <string name="title_postcards">Lösen Sie das Postkarten Rätsel, um weiterzukommen.</string>
     <string name="button_postcards_scan">QR Scannen</string>
     <string name="button_postcards_questions">Fragen Beantworten</string>
+
+    <!-- Postcard Questions -->
+
+    <string name="title_postcardquestions">Beantworten Sie diese Frage, um weiterzukommen!</string>
+    <string name="button_postcardquestion_play">Frage Abspielen</string>
+    <string name="button_postcardquestion_stop">Das Abspielen Abbrechen</string>
+    <string name="button_postcardquestion_input">Eingeben</string>
+    <string name="button_postcardquestion_reset">Rücksetzen</string>
+    <string name="label_postcardquestion_answer">Ihre Antwort erscheint hier</string>
 
     <!-- Lorem Ipsum -->
 

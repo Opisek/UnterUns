@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/stars">
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:text=""
+        android:id="@+id/label_postcardquestion_title"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorForegroundLight"
+        android:padding="5dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:paddingTop="100dp"
+        android:paddingBottom="100dp">
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp"
+
+            android:id="@+id/button_postcardquestion_play"
+
+            android:text="@string/button_postcardquestion_play"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:padding="5dp"
+            android:textColor="@color/colorForegroundLight"
+            android:background="@color/colorBackgroundDark"/>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="0px"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+
+                android:id="@+id/button_postcardquestion_input"
+
+                android:text="@string/button_postcardquestion_input"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:padding="5dp"
+                android:textColor="@color/colorForegroundLight"
+                android:background="@color/colorBackgroundDark"/>
+            <Button
+                android:layout_width="0px"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+
+                android:id="@+id/button_postcardquestion_reset"
+
+                android:text="@string/button_postcardquestion_reset"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:padding="5dp"
+                android:textColor="@color/colorForegroundLight"
+                android:background="@color/colorBackgroundDark"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp"
+
+            android:id="@+id/label_postcardquestion_answer"
+
+
+            android:text="@string/label_postcardquestion_answer"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:padding="5dp"
+            android:textColor="@color/colorForegroundLight"
+            android:background="@color/colorBackgroundDark"/>
+    </LinearLayout>
+</LinearLayout>
