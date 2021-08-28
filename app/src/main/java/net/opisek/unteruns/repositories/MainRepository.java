@@ -1,6 +1,5 @@
 package net.opisek.unteruns.repositories;
 
-import android.util.Log;
 import android.util.Pair;
 
 import net.opisek.unteruns.models.LocationModel;
@@ -29,8 +28,7 @@ public class MainRepository {
         initiateLocations();
         initializeRoutes();
         initializeMorseCodes();
-        initializeQuestions();
-        initializeAnswers();
+        initializePostcardQuestions();
         initializeQrCodes();
     }
 
@@ -181,53 +179,74 @@ public class MainRepository {
         addMorseCode(new MorseModel("Venedig"));
         addMorseCode(new MorseModel("Zuerich"));
 
-        //addMorseCode(new MorseModel("question1", "Was ist der hoechste Berg der Welt?"));
-        addMorseCode(new MorseModel("question1", "Hoechster Berg der Welt?"));
-        addMorseCode(new MorseModel("answer1", "Mount Everest"));
-        //addMorseCode(new MorseModel("question2", "Was ist der vierte Planet in unserem Sonnensystem?"));
-        addMorseCode(new MorseModel("question2", "Vierter Planet im Sonnensystem?"));
-        addMorseCode(new MorseModel("answer2", "Mars"));
+        //addMorseCode(new MorseModel("question1", "Was ist der vierte Planet in unserem Sonnensystem?"));
+        addMorseCode(new MorseModel("question1", "Vierter Planet im Sonnensystem?"));
+        addMorseCode(new MorseModel("answer1", "Mars"));
+        //addMorseCode(new MorseModel("question2", "Was ist der hoechste Berg der Welt?"));
+        addMorseCode(new MorseModel("question2", "Hoechster Berg der Welt?"));
+        addMorseCode(new MorseModel("answer2", "Mount Everest"));
         addMorseCode(new MorseModel("question3", "Wer bringt am Weinachten Geschenke?"));
         addMorseCode(new MorseModel("answer3", "Nikolaus"));
     }
 
     public MorseModel getMorseCode(String id) { return morseCodes.get(id); }
 
-    private MorseModel[] questions;
-    private int questionsIndex;
-    private void addQuestion(MorseModel q) { questions[++questionsIndex] = q; }
-
-    private void initializeQuestions() {
-        questions = new MorseModel[3];
-        questionsIndex = -1;
-        addQuestion(getMorseCode("question1"));
-        addQuestion(getMorseCode("question2"));
-        addQuestion(getMorseCode("question3"));
+    private MorseModel[] postcardQuestions;
+    private boolean[] postcardQuestionDone;
+    private MorseModel[] postcardAnswers;
+    private void initializePostcardQuestions() {
+        postcardQuestions = new MorseModel[]{
+            getMorseCode("question1"),
+            getMorseCode("question2"),
+            getMorseCode("question3")
+        };
+        postcardQuestionDone = new boolean[] {
+            false,
+            false,
+            false
+        };
+        postcardAnswers = new MorseModel[] {
+                getMorseCode("answer1"),
+                getMorseCode("answer2"),
+                getMorseCode("answer3")
+        };
     }
 
-    public MorseModel[] getQuestions() {
-        return questions;
+    public MorseModel[] getPostcardQuestions() { return postcardQuestions; }
+
+    public MorseModel getPostcardQuestion(int index) { return postcardQuestions[index]; }
+
+    PostcardQuestionDoneListener postcardQuestionDoneListener;
+    public interface PostcardQuestionDoneListener {
+        public void onDoneUpdated(int index);
+    }
+    public void setPostcardQuestionDoneListener(PostcardQuestionDoneListener listener) {
+        postcardQuestionDoneListener = listener;
     }
 
-    public MorseModel getQuestion(int index) {
-        return questions[index];
+    public boolean getPostcardQuestionDone(int index) { return postcardQuestionDone[index]; }
+
+    public boolean getAllPostcardQuestionsDone() {
+        boolean allDone = true;
+        for (int i = 0; i < postcardQuestions.length; i++) {
+            if (!postcardQuestionDone[i]) {
+                allDone = false;
+                break;
+            }
+        }
+        return allDone;
     }
 
-    private MorseModel[] answers;
-    private int answersIndex;
-    private void addAnswer(MorseModel a) { answers[++answersIndex] = a; }
-
-    private void initializeAnswers() {
-        answers = new MorseModel[3];
-        answersIndex = -1;
-        addAnswer(getMorseCode("answer1"));
-        addAnswer(getMorseCode("answer1"));
-        addAnswer(getMorseCode("answer1"));
+    public void setPostcardQuestionDone(int index) {
+        postcardQuestionDone[index] = true;
+        if (postcardQuestionDoneListener != null)postcardQuestionDoneListener.onDoneUpdated(index);
     }
 
-    public MorseModel getAnswer(int index) {
-        return answers[index];
-    }
+    public MorseModel getPostcardAnswer(int index) { return postcardAnswers[index]; }
+
+
+
+
 
     // ==============================================================================================================================================================================================
     //endregion

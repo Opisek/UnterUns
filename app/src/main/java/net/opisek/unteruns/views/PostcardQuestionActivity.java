@@ -103,8 +103,22 @@ public class PostcardQuestionActivity extends AppCompatActivity {
         });
     }
 
-    public void answerCorrect() {
+    @Override
+    protected void onStop() {
+        if (sounds != null) {
+            for (MediaPlayer sound : sounds) {
+                if (sound != null) {
+                    if (sound.isPlaying()) sound.stop();
+                    sound.reset();
+                    sound.release();
+                }
+            }
+        }
+        super.onStop();
+    }
 
+    public void answerCorrect() {
+        finish();
     }
 
     public void registerInput(int length) {

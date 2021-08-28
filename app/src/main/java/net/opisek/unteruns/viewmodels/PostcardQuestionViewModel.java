@@ -9,10 +9,12 @@ import net.opisek.unteruns.repositories.MainRepository;
 public class PostcardQuestionViewModel extends ViewModel {
     private MorseModel question;
     private MorseModel answer;
+    private int questionIndex;
 
     public void setQuestion(int i) {
-        question = MainRepository.getInstance().getQuestion(i);
-        answer = MainRepository.getInstance().getAnswer(i);
+        questionIndex = i;
+        question = MainRepository.getInstance().getPostcardQuestion(i);
+        answer = MainRepository.getInstance().getPostcardAnswer(i);
         clearInput();
     }
 
@@ -31,6 +33,7 @@ public class PostcardQuestionViewModel extends ViewModel {
             } while (index < answer.morse.length && answer.morse[index] >= 2);
             if (index >= answer.morse.length) {
                 getIsCorrect().setValue(true);
+                MainRepository.getInstance().setPostcardQuestionDone(questionIndex);
             }
         } else {
             canBeCorrect = false;

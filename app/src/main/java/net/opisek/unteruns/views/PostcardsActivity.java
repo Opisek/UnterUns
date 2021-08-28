@@ -6,15 +6,21 @@ import android.view.KeyEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import net.opisek.unteruns.R;
+import net.opisek.unteruns.viewmodels.PostcardsViewModel;
 
-public class PostcardsActivity extends AppCompatActivity {
+public class PostcardsActivity extends RiddleActivity {
+    private PostcardsViewModel viewModel;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_postcards);
+        viewModel = ViewModelProviders.of(this).get(PostcardsViewModel.class);
 
         findViewById(R.id.button_postcards_scan).setOnClickListener(new View.OnClickListener(){
             @Override public void onClick(View v) {
@@ -26,6 +32,24 @@ public class PostcardsActivity extends AppCompatActivity {
                 questions();
             }
         });
+
+        MutableLiveData<Boolean> allDone = viewModel.getAllDone();
+        if (allDone.getValue()) {
+            riddleSolved();
+        } else {
+            allDone.observe(this, new Observer<Boolean>() {
+                @Override
+                public void onChanged(Boolean done) {
+                    if (done) riddleSolved();
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        viewModel.checkAllDone();
+        super.onResume();
     }
 
     private void scan() {

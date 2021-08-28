@@ -43,12 +43,13 @@
 
     <!-- Postcard Questions -->
 
-    <string name="title_postcardquestions">Beantworten Sie diese Frage, um weiterzukommen!</string>
+    <string name="title_postcardquestions">Beantworten Sie diese Fragen, um weiterzukommen!</string>
     <string name="button_postcardquestion_play">Frage Abspielen</string>
     <string name="button_postcardquestion_stop">Das Abspielen Abbrechen</string>
     <string name="button_postcardquestion_input">Eingeben</string>
     <string name="button_postcardquestion_reset">Rücksetzen</string>
     <string name="label_postcardquestion_answer">Ihre Antwort erscheint hier</string>
+    <string name="button_postcardquestions_done">Fertig</string>
 
     <!-- Lorem Ipsum -->
 

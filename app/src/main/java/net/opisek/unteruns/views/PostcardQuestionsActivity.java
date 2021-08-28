@@ -1,6 +1,7 @@
 package net.opisek.unteruns.views;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Pair;
 import android.util.TypedValue;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -34,12 +36,13 @@ public class PostcardQuestionsActivity extends AppCompatActivity {
 
         LinearLayout buttonsList = findViewById(R.id.linear_postcardquestions_buttons);
         for (int i = 0; i < questions.length; i++) {
-            Button button = new Button(this);
+            MutableLiveData<Boolean> isDone = viewModel.getQuestionDone(i);
+
+            final Button button = new Button(this);
             button.setText(questions[i]);
             button.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             button.setGravity(Gravity.CENTER);
             button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
-            button.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorForegroundLight));
             button.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBackgroundDark));
             int pad = (int)dpToPx(5f);
             button.setPadding(pad, pad, pad, pad);
@@ -55,8 +58,68 @@ public class PostcardQuestionsActivity extends AppCompatActivity {
                 }
             });
 
+            button.setEnabled(!isDone.getValue());
+            if (isDone.getValue()) {
+                button.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorForegroundLightDisabled));
+                button.setPaintFlags(button.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            } else {
+                button.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorForegroundLight));
+                button.setPaintFlags(button.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+            }
+            isDone.observe(this, new Observer<Boolean>() {
+                @Override
+                public void onChanged(Boolean done) {
+                    button.setEnabled(!done);
+                    if (done) {
+                        button.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorForegroundLightDisabled));
+                        button.setPaintFlags(button.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    } else {
+                        button.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorForegroundLight));
+                        button.setPaintFlags(button.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+                    }
+                }
+            });
+
             buttonsList.addView(button);
         }
+
+        if (viewModel.getAllDone().getValue()) addAllDoneButton();
+        else viewModel.getAllDone().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean allDone) {
+                if (allDone) {
+                    addAllDoneButton();
+                }
+            }
+        });
+    }
+
+    public void addAllDoneButton() {
+        Button button = new Button(this);
+        button.setText(R.string.button_postcardquestions_done);
+        button.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        button.setGravity(Gravity.CENTER);
+        button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+        button.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorForegroundLight));
+        button.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBackgroundDark));
+        int pad = (int)dpToPx(5f);
+        button.setPadding(pad, pad, pad, pad);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f);
+        params.setMargins(0, 0, 0, (int)dpToPx(10f));
+        button.setLayoutParams(params);
+
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override public void onClick(View v) {
+                goBack();
+            }
+        });
+
+        ((LinearLayout)findViewById(R.id.linear_postcardquestions_buttons)).addView(button);
+    }
+
+    public void goBack() {
+        finish();
     }
 
     private void onPicked(int question) {

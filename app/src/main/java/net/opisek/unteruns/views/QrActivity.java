@@ -72,6 +72,8 @@ public class QrActivity extends AppCompatActivity {
     private boolean soundDisabled;
     private boolean hasParent;
 
+    private MediaPlayer[] sounds;
+
     // https://github.com/yuriy-budiyev/code-scanner
 
     @Override
@@ -177,12 +179,11 @@ public class QrActivity extends AppCompatActivity {
                 setVolumeControlStream(AudioManager.STREAM_MUSIC);
                 viewModel = ViewModelProviders.of(this).get(MorseQrViewModel.class);
                 hasParent = true;
-
-                final MediaPlayer[] sounds = new MediaPlayer[] {
-                    MediaPlayer.create(this, R.raw.morse_sound_short),
-                    MediaPlayer.create(this, R.raw.morse_sound_long),
-                    MediaPlayer.create(this, R.raw.morse_pause_short),
-                    MediaPlayer.create(this, R.raw.morse_pause_long)
+                sounds = new MediaPlayer[] {
+                        MediaPlayer.create(this, R.raw.morse_sound_short),
+                        MediaPlayer.create(this, R.raw.morse_sound_long),
+                        MediaPlayer.create(this, R.raw.morse_pause_short),
+                        MediaPlayer.create(this, R.raw.morse_pause_long)
                 };
                 final Handler handler = new Handler();
                 final Context context = getApplicationContext();
@@ -194,7 +195,7 @@ public class QrActivity extends AppCompatActivity {
                             public void run() {
                                 handler.post(new Runnable() {
                                     public void run() {
-                                        playMorse(sounds, morseSequence.first, 0);
+                                        playMorse(morseSequence.first, 0);
                                     }
                                 });
                             }
@@ -209,7 +210,7 @@ public class QrActivity extends AppCompatActivity {
         scanner.startPreview();
     }
 
-    private void playMorse(final MediaPlayer[] sounds, final int[] seq, int i) {
+    private void playMorse(final int[] seq, int i) {
         if (i >= seq.length) ((MorseQrViewModel)viewModel).playbackFinished();
         else {
             MediaPlayer plr = sounds[seq[i++]];
@@ -217,7 +218,7 @@ public class QrActivity extends AppCompatActivity {
             plr.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
-                    if (!soundDisabled) playMorse(sounds, seq, newIndex);
+                    if (!soundDisabled) playMorse(seq, newIndex);
                 }
             });
             plr.start();
@@ -240,6 +241,20 @@ public class QrActivity extends AppCompatActivity {
         soundDisabled = false;
         scanner.startPreview();
         super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        if (sounds != null) {
+            for (MediaPlayer sound : sounds) {
+                if (sound != null) {
+                    if (sound.isPlaying()) sound.stop();
+                    sound.reset();
+                    sound.release();
+                }
+            }
+        }
+        super.onStop();
     }
 
     private void observerRiddle(MutableLiveData<MainRepository.Riddle> mutableLiveData) {
