@@ -76,6 +76,16 @@
             android:label="Rätsel Eingabefeld">
         </activity>
 
+        <!-- VoteRiddle -->
+        <activity
+            android:name=".views.VoteRiddleActivity"
+            android:label="Imposter Wahl Rätsel">
+        </activity>
+        <activity
+            android:name=".views.VoteResultActivity"
+            android:label="Imposter Wahl Ergebnisse">
+        </activity>
+
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>

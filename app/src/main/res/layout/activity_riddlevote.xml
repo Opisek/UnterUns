@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/stars">
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:text="@string/title_vote_riddle"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorForegroundLight"
+        android:padding="5dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:paddingTop="100dp"
+        android:paddingBottom="100dp">
+
+        <Button
+            android:id="@+id/button_vote_red"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+
+            android:layout_weight="1"
+
+            android:background="@color/colorBackgroundDark"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/button_vote_red"
+            android:textAlignment="center"
+            android:textColor="@color/colorForegroundLight"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/button_vote_white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+
+            android:layout_weight="1"
+
+            android:background="@color/colorBackgroundDark"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/button_vote_white"
+            android:textAlignment="center"
+            android:textColor="@color/colorForegroundLight"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_vote_confirm"
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_marginBottom="10dp"
+
+        android:layout_weight="1"
+
+        android:background="@color/colorBackgroundDark"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/button_vote_confirm"
+        android:textAlignment="center"
+        android:textColor="@color/colorForegroundLight"
+        android:textSize="25sp" />
+
+</LinearLayout>

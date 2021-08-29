@@ -70,6 +70,18 @@
 
     <string name="key_preferences">net.opisek.unteruns.progress</string>
 
+    <!-- Vote -->
+
+    <string name="title_vote_riddle">Wählen sie den Mörder, um weiterzukommen.</string>
+    <string name="button_vote_red">Rot</string>
+    <string name="button_vote_white">Weiß</string>
+    <string name="button_vote_confirm">Weiter</string>
+
+    <string name="title_vote_result">Danke fürs Spielen!</string>
+    <string name="label_vote_right">Hurray :D</string>
+    <string name="label_vote_wrong">Schade Marmelade</string>
+    <string name="button_vote_menu">Zum Hauptmenü</string>
+
     <!-- Lorem Ipsum -->
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet nibh eget mi vestibulum convallis. In vehicula lacus at enim dapibus varius vitae at nisl. Mauris id elementum tortor. Nulla vel tristique purus. Proin interdum ultrices nibh, vitae efficitur tortor mollis vitae. Vestibulum a fermentum mi, vitae venenatis mi. Aenean consectetur rutrum lorem. Praesent urna ipsum, varius a dapibus ac, faucibus pretium neque. Nulla ullamcorper sollicitudin metus. Phasellus et eros erat. Donec ac volutpat risus.
