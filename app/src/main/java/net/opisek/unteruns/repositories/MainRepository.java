@@ -109,10 +109,12 @@ public class MainRepository {
     }
 
     private RouteModel route;
+    private int routeNumber;
     private int routeProgress;
 
     public boolean pickRoute(int index) {
         if (index < 0 || index > routes.size()) return false;
+        routeNumber = index;
         route = routes.get(index);
         routeProgress = -1;
         return true;
@@ -158,6 +160,16 @@ public class MainRepository {
 
     public void lostWaypoint() {
         routeProgress--;
+    }
+
+    public int getRouteProgress() { return routeProgress; }
+
+    public int getRouteNumber() { return routeNumber; }
+
+    public void continueFromSave(int routeNumber, int routeProgress) {
+        this.routeNumber = routeNumber;
+        route = routes.get(routeNumber);
+        this.routeProgress = routeProgress;
     }
 
     // ==============================================================================================================================================================================================

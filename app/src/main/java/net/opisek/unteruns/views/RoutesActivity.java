@@ -2,6 +2,7 @@ package net.opisek.unteruns.views;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Pair;
 import android.util.TypedValue;
@@ -80,16 +81,21 @@ public class RoutesActivity extends AppCompatActivity {
     }
 
     private void onPicked() {
+        Intent intent;
         if (myState == GameState.NEW) {
-            Intent intent = new Intent(this, CompassActivity.class);
-            //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            startActivity(intent);
+            intent = new Intent(this, CompassActivity.class);
         } else {
-            Intent intent = new Intent(this, QrActivity.class);
+            intent = new Intent(this, QrActivity.class);
             intent.putExtra("type", QrActivity.QrType.CONTINUE);
-            //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            startActivity(intent);
         }
+
+        SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.key_preferences), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("inProgress", true);
+        editor.putInt("routeNumber", viewModel.getRouterNumber());
+        editor.apply();
+
+        startActivity(intent);
     }
 
     private float dpToPx(float dp) {

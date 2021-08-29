@@ -66,6 +66,10 @@
     <string name="button_inputquestion_check">Antwort Prüfen</string>
     <string name="label_inputquestion_wrong">Falsche Antwort</string>
 
+    <!-- Saves -->
+
+    <string name="key_preferences">net.opisek.unteruns.progress</string>
+
     <!-- Lorem Ipsum -->
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet nibh eget mi vestibulum convallis. In vehicula lacus at enim dapibus varius vitae at nisl. Mauris id elementum tortor. Nulla vel tristique purus. Proin interdum ultrices nibh, vitae efficitur tortor mollis vitae. Vestibulum a fermentum mi, vitae venenatis mi. Aenean consectetur rutrum lorem. Praesent urna ipsum, varius a dapibus ac, faucibus pretium neque. Nulla ullamcorper sollicitudin metus. Phasellus et eros erat. Donec ac volutpat risus.

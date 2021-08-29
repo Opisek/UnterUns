@@ -3,6 +3,7 @@ package net.opisek.unteruns.views;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -23,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -148,6 +150,12 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
                 if (reached) stopReached();
             }
         });
+        viewModel.getProgress().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer progress) {
+                saveProgress(progress);
+            }
+        });
     }
 
     private void stopReached() {
@@ -156,6 +164,14 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
         //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         this.finish();
+    }
+
+    private void saveProgress(int progress) {
+        Log.v("test", "progress saved: " + progress);
+        SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.key_preferences), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("routeProgress", progress);
+        editor.apply();
     }
 
     @Override
