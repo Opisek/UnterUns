@@ -6,6 +6,7 @@
 
     <color name="colorBackgroundDark">#363638</color>
     <color name="colorBackgroundLight">#DCE7E7</color>
+    <color name="colorBackgroundWrong">#a11818</color>
 
     <color name="colorPrimary">#5B56B8</color>
     <color name="colorPrimaryDark">#2F2D59</color>

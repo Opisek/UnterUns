@@ -60,8 +60,14 @@ public class RouteQrViewModel extends QrViewModel {
 
     @Override
     public void onQrScan(QrModel qr) {
-        if (!(qr instanceof RouteQrModel)) return; // not a box code
-        if (!((RouteQrModel)qr).location.id.equals(myStop.location.id)) return; // wrong box
+        if (!(qr instanceof RouteQrModel)) {
+            setCorrectQr(false);
+            return;
+        }
+        if (!((RouteQrModel)qr).location.id.equals(myStop.location.id)) { ;
+            setCorrectQr(false);
+            return;
+        }
         riddle.setValue(myStop.riddle);
     }
 }

@@ -1,6 +1,7 @@
 package net.opisek.unteruns.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PersistableBundle;
@@ -115,5 +116,27 @@ public class InputQuestionActivity extends RiddleActivity {
 
     private void checkAnswer() {
         viewModel.checkCorrect(textField.getText().toString());
+    }
+
+    private void mainMenu() {
+        Intent intent = new Intent(this, MenuActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        this.finish();
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            BackDialog dialog = new BackDialog();
+            dialog.setBackListener(new BackDialog.BackListener() {
+                @Override
+                public void onUserResponse(Boolean result) {
+                    if (result) mainMenu();
+                }
+            });
+            dialog.show(getSupportFragmentManager(), "Back Dialog");
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

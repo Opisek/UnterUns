@@ -30,7 +30,10 @@ public class MorseQrViewModel extends QrViewModel {
 
     @Override
     public void onQrScan(QrModel qr) {
-        if (!(qr instanceof MorseQrModel)) return;
+        if (!(qr instanceof MorseQrModel)) {
+            setCorrectQr(false);
+            return;
+        }
         if (morseLocked) return;
         morseLocked = true;
         morseSequence.setValue(new Pair(((MorseQrModel) qr).morse.morse, ++dataID));

@@ -1,29 +1,22 @@
 package net.opisek.unteruns.views;
 
 import android.Manifest;
-import android.app.ActivityManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
-import android.media.AudioAttributes;
-import android.media.AudioFormat;
 import android.media.AudioManager;
-import android.media.AudioTrack;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Pair;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -41,17 +34,14 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 
 import net.opisek.unteruns.R;
-import net.opisek.unteruns.models.MorseQrModel;
 import net.opisek.unteruns.repositories.GpsRepository;
 import net.opisek.unteruns.repositories.MainRepository;
 import net.opisek.unteruns.viewmodels.ContinueQrViewModel;
 import net.opisek.unteruns.viewmodels.MorseQrViewModel;
 import net.opisek.unteruns.viewmodels.QrViewModel;
+import net.opisek.unteruns.viewmodels.RightWrongQrViewModel;
 import net.opisek.unteruns.viewmodels.RouteQrViewModel;
 import net.opisek.unteruns.viewmodels.TestQrViewModel;
-
-import java.util.HashMap;
-import java.util.List;
 
 public class QrActivity extends AppCompatActivity {
 
@@ -59,11 +49,16 @@ public class QrActivity extends AppCompatActivity {
         ROUTE,
         CONTINUE,
         TEST,
-        MORSE
+        MORSE,
+        RIGHTWRONG
     }
     private QrType myQrType;
 
     private QrViewModel viewModel;
+    private Handler handler;
+
+    private TextView wrongLabel;
+    private boolean animationInProgress;
 
     private CodeScanner scanner;
     private CodeScannerView scannerView;
@@ -81,13 +76,17 @@ public class QrActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr);
 
+        handler = new Handler();
+
         myQrType = (QrType)getIntent().getExtras().getSerializable("type");
 
         hasParent = false;
         soundDisabled = false;
 
+        wrongLabel = findViewById(R.id.label_qr_wrong);
+
         // qr scanner
-        scannerView = findViewById(R.id.scanner_view);
+        scannerView = findViewById(R.id.scanner_qr);
         scanner = new CodeScanner(this, scannerView);
         scanner.setDecodeCallback(new DecodeCallback() {
             @Override
@@ -185,7 +184,6 @@ public class QrActivity extends AppCompatActivity {
                         MediaPlayer.create(this, R.raw.morse_pause_short),
                         MediaPlayer.create(this, R.raw.morse_pause_long)
                 };
-                final Handler handler = new Handler();
                 final Context context = getApplicationContext();
                 ((MorseQrViewModel)viewModel).getMorseSequence().observe(this, new Observer<Pair<int[], Integer>>() {
                     @Override
@@ -204,10 +202,67 @@ public class QrActivity extends AppCompatActivity {
                     }
                 });
                 break;
+            case RIGHTWRONG:
+                title.setText(R.string.title_qr_rightwrong);
+                viewModel = ViewModelProviders.of(this).get(RightWrongQrViewModel.class);
+                break;
         }
+
+        animationInProgress = false;
+        viewModel.getCorrectQr().observe(this, new Observer<Pair<Boolean, Integer>>() {
+            @Override
+            public void onChanged(Pair<Boolean, Integer> correct) {
+                if (correct.second == 0) return;
+                if (!correct.first) animateWrongIn();
+                else {
+                    if (myQrType.equals(QrType.RIGHTWRONG)) riddleSolved();
+                }
+            }
+        });
 
         camDisabled = false;
         scanner.startPreview();
+    }
+
+    private void riddleSolved() {
+        Intent intent = new Intent(this, CompassActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+        this.finish();
+    }
+
+    private void animateWrongIn() {
+        if (animationInProgress) return;
+        animationInProgress = true;
+        wrongLabel.setAlpha(0f);
+        wrongLabel.animate()
+                .alpha(1f)
+                .setDuration(200);
+        handler.removeCallbacksAndMessages(null);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                animateWrongOut();
+            }
+        }, 1200);
+    }
+
+    private void animateWrongOut() {
+        wrongLabel.setAlpha(1f);
+        wrongLabel.animate()
+                .alpha(0f)
+                .setDuration(200);
+        handler.removeCallbacksAndMessages(null);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                animeWrongDone();
+            }
+        }, 200);
+    }
+
+    private void animeWrongDone() {
+        animationInProgress = false;
     }
 
     private void playMorse(final int[] seq, int i) {
@@ -279,6 +334,10 @@ public class QrActivity extends AppCompatActivity {
             case INPUT:
                 intent = new Intent(this, InputQuestionActivity.class);
                 intent.putExtra("id", MainRepository.inputQuestionID.TEST);
+                break;
+            case RIGHTWRONG:
+                intent = new Intent(this, QrActivity.class);
+                intent.putExtra("type", QrType.RIGHTWRONG);
                 break;
             default:
                 intent = new Intent(this, CompassActivity.class);

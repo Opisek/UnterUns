@@ -6,6 +6,7 @@ import net.opisek.unteruns.models.LocationModel;
 import net.opisek.unteruns.models.MorseModel;
 import net.opisek.unteruns.models.MorseQrModel;
 import net.opisek.unteruns.models.QrModel;
+import net.opisek.unteruns.models.RightWrongQrModel;
 import net.opisek.unteruns.models.RouteModel;
 import net.opisek.unteruns.models.RouteQrModel;
 import net.opisek.unteruns.models.WaypointModel;
@@ -74,9 +75,9 @@ public class MainRepository {
         addRoute(
                 new RouteModel("Leicht", "4 Stunden",
                         new WaypointModel[]{
-                                new WaypointModel(getLocation("ggm"), Riddle.INPUT),
-                                new WaypointModel(getLocation("eingang"), Riddle.POSTCARDS),
-                                new WaypointModel(getLocation("koloman")),
+                                new WaypointModel(getLocation("ggm"), Riddle.RIGHTWRONG),
+                                new WaypointModel(getLocation("eingang"), Riddle.INPUT),
+                                new WaypointModel(getLocation("koloman"), Riddle.POSTCARDS),
                                 new WaypointModel(getLocation("kapellchen")),
                                 new WaypointModel(getLocation("ggm"), Riddle.FINAL)
                         }
@@ -296,6 +297,10 @@ public class MainRepository {
         addQrCode(new MorseQrModel("707de83f-b25b-4d8b-b545-25e80e8001e0", getMorseCode("rio-de-janeiro")));
         addQrCode(new MorseQrModel("96a2af77-8f53-44ca-ac3b-d657948e8ee8", getMorseCode("venedig")));
         addQrCode(new MorseQrModel("ab55b93c-a03e-46de-908e-eb0afd0f557c", getMorseCode("zuerich")));
+
+        addQrCode(new RightWrongQrModel("7e2dac79-f588-406b-abfa-1d882fdb9102", true));
+        addQrCode(new RightWrongQrModel("05dcdaaa-81cb-4911-b59d-528b20f7707c", false));
+        addQrCode(new RightWrongQrModel("0ba3cbc2-6bf4-48fe-9621-9b1d199775c5", false));
     }
 
     public QrModel getQrCode(String id) {
@@ -311,6 +316,7 @@ public class MainRepository {
         NONE,
         POSTCARDS,
         INPUT,
+        RIGHTWRONG,
         FINAL
     }
 

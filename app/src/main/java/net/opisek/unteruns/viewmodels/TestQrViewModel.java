@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import net.opisek.unteruns.models.MorseQrModel;
 import net.opisek.unteruns.models.QrModel;
+import net.opisek.unteruns.models.RightWrongQrModel;
 import net.opisek.unteruns.models.RouteQrModel;
 import net.opisek.unteruns.models.WaypointModel;
 import net.opisek.unteruns.repositories.MainRepository;
@@ -30,6 +31,8 @@ public class TestQrViewModel extends QrViewModel {
         } else if ((qr instanceof MorseQrModel)) {
             desc = "Morse QR: " + ((MorseQrModel)qr).morse.text;
             //desc = "Morse QR: " + Arrays.toString(((MorseQrModel)qr).morse.morse);
+        } else if ((qr instanceof RightWrongQrModel)) {
+            desc = "RightWrong QR: " + (((RightWrongQrModel)qr).isRight ? "Right" : "Wrong");
         } else {
             desc = "Unknown QR";
         }

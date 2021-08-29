@@ -34,6 +34,7 @@
     <string name="title_qr_continue">Scannen Sie den letzten QR Code, um dort wieder anzufangen.</string>
     <string name="title_qr_test">QR Tester</string>
     <string name="title_qr_morse">Scannen Sie den entsprechenden QR Code, um eine Geheimnachricht anzuhören.</string>
+    <string name="title_qr_rightwrong">Finden Sie den richtigien QR Code, um weiterzukommen.</string>
 
     <!-- Postcards -->
 
