@@ -16,10 +16,10 @@ public abstract class QrViewModel extends ViewModel {
 
     public void interpretUUID(String input) {
         final long time = System.currentTimeMillis();
-        if (throttle == 0) {
+        /*if (throttle == 0) {         // uncomment to add delay before first scan
             throttle = time - 1500;
             return;
-        }
+        }*/
         if (time - throttle >= 3000) {
             QrModel res = MainRepository.getInstance().getQrCode(input);
             if (res != null) {

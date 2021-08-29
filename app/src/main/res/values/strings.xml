@@ -9,6 +9,9 @@
     <string name="button_menu_continue">Spiel Fortsetzen</string>
     <string name="button_menu_credits">Credits</string>
 
+    <string name="button_cheat_continue">AB ZEITPUNKT STARTEN</string>
+    <string name="button_cheat_qr">QR TESTER</string>
+
     <!-- Routes -->
 
     <string name="title_routes">Wählen Sie die Schwierigkeitsstufe.</string>
@@ -20,9 +23,16 @@
     <!-- Back Dialog -->
 
     <string name="title_back">Achtung</string>
-    <string name="label_back">Wollen Sie wirklich in das Hauptmenü zurück?\nIhr derzeitige Progress wird nicht gespeicher!</string>
+    <string name="label_back">Wollen Sie wirklich in das Hauptmenü zurückkehren?</string>
     <string name="button_back_yes">Hauptmenü</string>
     <string name="button_back_no">Nein</string>
+
+    <!-- Cheat Dialog -->
+
+    <string name="title_cheat">Adminmenü</string>
+    <string name="label_cheat">Bitte geben Sie das Kennwort für das Adminmenü ein.</string>
+    <string name="button_cheat_submit">OK</string>
+    <string name="button_cheat_back">Zurück</string>
 
     <!-- Compass -->
 

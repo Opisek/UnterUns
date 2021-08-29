@@ -82,12 +82,12 @@ public class RoutesActivity extends AppCompatActivity {
     private void onPicked() {
         if (myState == GameState.NEW) {
             Intent intent = new Intent(this, CompassActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(intent);
         } else {
             Intent intent = new Intent(this, QrActivity.class);
             intent.putExtra("type", QrActivity.QrType.CONTINUE);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(intent);
         }
     }

@@ -226,7 +226,7 @@ public class QrActivity extends AppCompatActivity {
 
     private void riddleSolved() {
         Intent intent = new Intent(this, CompassActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         this.finish();
     }
@@ -341,7 +341,7 @@ public class QrActivity extends AppCompatActivity {
                 break;
             default:
                 intent = new Intent(this, CompassActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
         }
         startActivity(intent);
@@ -360,7 +360,7 @@ public class QrActivity extends AppCompatActivity {
         scanner.stopPreview();
         scanner.releaseResources();
         Intent intent = new Intent(this, CompassActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         this.finish();
     }

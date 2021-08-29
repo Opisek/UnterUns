@@ -153,22 +153,22 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
     private void stopReached() {
         Intent intent = new Intent(this, QrActivity.class);
         intent.putExtra("type", QrActivity.QrType.ROUTE);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         this.finish();
     }
 
     @Override
     protected void onResume() {
-        super.onResume();
         sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), SensorManager.SENSOR_DELAY_GAME);
         sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_GAME);
+        super.onResume();
     }
 
     @Override
     protected void onPause() {
-        super.onPause();
         sensorManager.unregisterListener(this);
+        super.onPause();
     }
 
     @Override

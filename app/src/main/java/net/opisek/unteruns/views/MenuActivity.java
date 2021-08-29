@@ -6,7 +6,6 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
 
 import net.opisek.unteruns.R;
 
@@ -31,9 +30,9 @@ public class MenuActivity extends AppCompatActivity {
                 showCredits();
             }
         });
-        findViewById(R.id.button_menu_qr).setOnClickListener(new View.OnClickListener(){
+        findViewById(R.id.label_menu_title).setOnClickListener(new View.OnClickListener(){
             @Override public void onClick(View v) {
-                qrInterpreter();
+                cheatDialog();
             }
         });
     }
@@ -44,16 +43,25 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
     private void continueGame() {
-        Intent intent = new Intent(this, RoutesActivity.class);
-        intent.putExtra("state", RoutesActivity.GameState.CONTINUE);
-        startActivity(intent);
+        //Intent intent = new Intent(this, RoutesActivity.class);
+        //intent.putExtra("state", RoutesActivity.GameState.CONTINUE);
+        //startActivity(intent);
     }
     private void showCredits() {
         startActivity(new Intent(this, CreditsActivity.class));
     }
-    private void qrInterpreter() {
-        Intent intent = new Intent(this, QrActivity.class);
-        intent.putExtra("type", QrActivity.QrType.TEST);
-        startActivity(intent);
+
+    private void cheatMenu() {
+        startActivity(new Intent(this, CheatMenuActivity.class));
+    }
+    private void cheatDialog() {
+        CheatDialog dialog = new CheatDialog();
+        dialog.setCheatDialogListenerListener(new CheatDialog.CheatDialogListener() {
+            @Override
+            public void onUserResponse(Boolean result) {
+                if (result) cheatMenu();
+            }
+        });
+        dialog.show(getSupportFragmentManager(), "Cheat Dialog");
     }
 }
