@@ -276,6 +276,10 @@ public class QrActivity extends AppCompatActivity {
             case POSTCARDS:
                 intent = new Intent(this, PostcardsActivity.class);
                 break;
+            case INPUT:
+                intent = new Intent(this, InputQuestionActivity.class);
+                intent.putExtra("id", MainRepository.inputQuestionID.TEST);
+                break;
             default:
                 intent = new Intent(this, CompassActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);

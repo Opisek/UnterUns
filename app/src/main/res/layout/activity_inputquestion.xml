@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/stars">
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:text="@string/title_inputquestion"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorForegroundLight"
+        android:padding="5dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:paddingTop="100dp"
+        android:paddingBottom="100dp">
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp"
+
+            android:id="@+id/field_inputquestion_answer"
+
+            android:text="@string/field_inputquestion_answer"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:padding="5dp"
+            android:textColor="@color/colorForegroundLight"
+            android:background="@color/colorBackgroundDark"
+
+            android:maxLines="1"
+            android:inputType="text"/>
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp"
+
+            android:id="@+id/button_inputquestion_check"
+
+            android:text="@string/button_inputquestion_check"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:padding="5dp"
+            android:textColor="@color/colorForegroundLight"
+            android:background="@color/colorBackgroundDark"/>
+    </LinearLayout>
+</LinearLayout>

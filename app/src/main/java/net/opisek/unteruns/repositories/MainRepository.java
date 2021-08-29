@@ -29,6 +29,7 @@ public class MainRepository {
         initializeRoutes();
         initializeMorseCodes();
         initializePostcardQuestions();
+        initializeInputQuestions();
         initializeQrCodes();
     }
 
@@ -73,8 +74,8 @@ public class MainRepository {
         addRoute(
                 new RouteModel("Leicht", "4 Stunden",
                         new WaypointModel[]{
-                                new WaypointModel(getLocation("ggm"), Riddle.POSTCARDS),
-                                new WaypointModel(getLocation("eingang")),
+                                new WaypointModel(getLocation("ggm"), Riddle.INPUT),
+                                new WaypointModel(getLocation("eingang"), Riddle.POSTCARDS),
                                 new WaypointModel(getLocation("koloman")),
                                 new WaypointModel(getLocation("kapellchen")),
                                 new WaypointModel(getLocation("ggm"), Riddle.FINAL)
@@ -191,6 +192,11 @@ public class MainRepository {
 
     public MorseModel getMorseCode(String id) { return morseCodes.get(id); }
 
+    // ==============================================================================================================================================================================================
+    //endregion
+    //region                                                                        POSTCARD QUESTIONS
+    // ==============================================================================================================================================================================================
+
     private MorseModel[] postcardQuestions;
     private boolean[] postcardQuestionDone;
     private MorseModel[] postcardAnswers;
@@ -245,8 +251,23 @@ public class MainRepository {
     public MorseModel getPostcardAnswer(int index) { return postcardAnswers[index]; }
 
 
+    // ==============================================================================================================================================================================================
+    //endregion
+    //region                                                                        INPUT QUESTIONS
+    // ==============================================================================================================================================================================================
 
+    public enum inputQuestionID {
+        TEST
+    };
 
+    private HashMap<inputQuestionID, String> inputQuestionAnswers;
+
+    private void initializeInputQuestions() {
+        inputQuestionAnswers = new HashMap<>();
+        inputQuestionAnswers.put(inputQuestionID.TEST, "test");
+    }
+
+    public String getInputQuestionAnswer(inputQuestionID id) { return inputQuestionAnswers.get(id); }
 
     // ==============================================================================================================================================================================================
     //endregion
@@ -289,6 +310,7 @@ public class MainRepository {
     public enum Riddle {
         NONE,
         POSTCARDS,
+        INPUT,
         FINAL
     }
 
