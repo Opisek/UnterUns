@@ -270,14 +270,14 @@ public class MainRepository {
     // ==============================================================================================================================================================================================
 
     public enum inputQuestionID {
-        TEST
+        CROSSWORD
     };
 
     private HashMap<inputQuestionID, String> inputQuestionAnswers;
 
     private void initializeInputQuestions() {
         inputQuestionAnswers = new HashMap<>();
-        inputQuestionAnswers.put(inputQuestionID.TEST, "test");
+        inputQuestionAnswers.put(inputQuestionID.CROSSWORD, "Astronaut");
     }
 
     public String getInputQuestionAnswer(inputQuestionID id) { return inputQuestionAnswers.get(id); }
@@ -313,6 +313,11 @@ public class MainRepository {
         addQrCode(new RightWrongQrModel("7e2dac79-f588-406b-abfa-1d882fdb9102", true));
         addQrCode(new RightWrongQrModel("05dcdaaa-81cb-4911-b59d-528b20f7707c", false));
         addQrCode(new RightWrongQrModel("0ba3cbc2-6bf4-48fe-9621-9b1d199775c5", false));
+        addQrCode(new RightWrongQrModel("d2c8868f-30b7-44e0-869b-feba728af40d", false));
+        addQrCode(new RightWrongQrModel("82d35c5a-821f-4e78-ac07-37161e0dfc90", false));
+        addQrCode(new RightWrongQrModel("8be83841-b271-4368-8078-f86dcb0e6d6c", false));
+        addQrCode(new RightWrongQrModel("356bf08d-9ebf-4020-bc08-433ccc173bd1", false));
+        addQrCode(new RightWrongQrModel("880b68c3-fe55-4ac6-bffc-40bbf93d3730", false));
     }
 
     public QrModel getQrCode(String id) {

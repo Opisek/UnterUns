@@ -14,7 +14,6 @@ import android.util.Pair;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
-import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -333,7 +332,7 @@ public class QrActivity extends AppCompatActivity {
                 break;
             case INPUT:
                 intent = new Intent(this, InputQuestionActivity.class);
-                intent.putExtra("id", MainRepository.inputQuestionID.TEST);
+                intent.putExtra("id", MainRepository.inputQuestionID.CROSSWORD);
                 break;
             case RIGHTWRONG:
                 intent = new Intent(this, QrActivity.class);

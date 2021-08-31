@@ -12,7 +12,7 @@ public class InputQuestionViewModel extends ViewModel {
     private String answer;
 
     public void setAnswer(MainRepository.inputQuestionID id) {
-        answer = MainRepository.getInstance().getInputQuestionAnswer(id);
+        answer = MainRepository.getInstance().getInputQuestionAnswer(id).toLowerCase();
     }
 
     private MutableLiveData<Pair<Boolean, Integer>> isCorrect;
@@ -25,6 +25,6 @@ public class InputQuestionViewModel extends ViewModel {
     }
 
     public void checkCorrect(String input) {
-        isCorrect.setValue(new Pair(input.equals(answer), isCorrect.getValue().second+1));
+        isCorrect.setValue(new Pair(input.toLowerCase().equals(answer), isCorrect.getValue().second+1));
     }
 }
