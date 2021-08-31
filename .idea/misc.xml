@@ -3,13 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/giler/StudioProjects/UnterUns/app/src/main/res/layout/activity_cheatmenu.xml" value="0.4171875" />
         <entry key="..\:/Users/giler/StudioProjects/UnterUns/app/src/main/res/layout/activity_compass.xml" value="0.33" />
+        <entry key="..\:/Users/giler/StudioProjects/UnterUns/app/src/main/res/layout/activity_inputquestion.xml" value="0.4171875" />
         <entry key="..\:/Users/giler/StudioProjects/UnterUns/app/src/main/res/layout/activity_menu.xml" value="0.25" />
+        <entry key="..\:/Users/giler/StudioProjects/UnterUns/app/src/main/res/layout/activity_postcardquestion.xml" value="0.2803442028985507" />
+        <entry key="..\:/Users/giler/StudioProjects/UnterUns/app/src/main/res/layout/activity_postcardquestions.xml" value="0.4171875" />
+        <entry key="..\:/Users/giler/StudioProjects/UnterUns/app/src/main/res/layout/activity_postcards.xml" value="0.4171875" />
+        <entry key="..\:/Users/giler/StudioProjects/UnterUns/app/src/main/res/layout/activity_riddlevote.xml" value="0.4171875" />
         <entry key="..\:/Users/giler/StudioProjects/UnterUns/app/src/main/res/layout/activity_routes.xml" value="0.4171875" />
+        <entry key="..\:/Users/giler/StudioProjects/UnterUns/app/src/main/res/layout/activity_voteresult.xml" value="0.4171875" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
 </project>

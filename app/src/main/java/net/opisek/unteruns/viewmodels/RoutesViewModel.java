@@ -29,7 +29,7 @@ public class RoutesViewModel extends ViewModel {
         return picked;
     }
 
-    public int getRouterNumber() {
+    public int getRouteNumber() {
         return MainRepository.getInstance().getRouteNumber();
     }
 }

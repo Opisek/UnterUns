@@ -19,7 +19,8 @@
 
         <activity
             android:name=".views.MenuActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -74,6 +75,16 @@
         <activity
             android:name=".views.InputQuestionActivity"
             android:label="Rätsel Eingabefeld">
+        </activity>
+
+        <!-- VoteRiddle -->
+        <activity
+            android:name=".views.VoteRiddleActivity"
+            android:label="Imposter Wahl Rätsel">
+        </activity>
+        <activity
+            android:name=".views.VoteResultActivity"
+            android:label="Imposter Wahl Ergebnisse">
         </activity>
 
     </application>

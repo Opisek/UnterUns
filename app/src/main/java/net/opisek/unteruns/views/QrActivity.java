@@ -338,6 +338,9 @@ public class QrActivity extends AppCompatActivity {
                 intent = new Intent(this, QrActivity.class);
                 intent.putExtra("type", QrType.RIGHTWRONG);
                 break;
+            case FINAL:
+                intent = new Intent(this, VoteRiddleActivity.class);
+                break;
             default:
                 intent = new Intent(this, CompassActivity.class);
                 //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);

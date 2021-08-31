@@ -10,7 +10,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -92,10 +91,11 @@ public class RoutesActivity extends AppCompatActivity {
         SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.key_preferences), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean("inProgress", true);
-        editor.putInt("routeNumber", viewModel.getRouterNumber());
+        editor.putInt("routeNumber", viewModel.getRouteNumber());
         editor.apply();
 
         startActivity(intent);
+        finish();
     }
 
     private float dpToPx(float dp) {
