@@ -35,7 +35,11 @@
             android:text=""
             android:textAlignment="center"
             android:textColor="@color/colorForegroundLight"
-            android:textSize="25sp"/>
+            android:autoSizeMaxTextSize="25sp"
+            android:autoSizeMinTextSize="20sp"
+            android:autoSizeTextType="uniform"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"/>
 
         <TextView
             android:id="@+id/label_compass_distance"
