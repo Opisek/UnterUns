@@ -40,11 +40,11 @@
 
     <!-- QR -->
 
-    <string name="title_qr_route">Willkommen an der Station "§0"!\nScannen Sie den QR Code auf dem Behälter.</string>
-    <string name="title_qr_continue">Scannen Sie den letzten QR Code, um dort wieder anzufangen.</string>
+    <string name="title_qr_route">Scannen Sie den QR Code auf dem versteckten Behälter.</string>
+    <string name="title_qr_continue">Scannen Sie einen QR Code, um dort anzufangen.</string>
     <string name="title_qr_test">QR Tester</string>
     <string name="title_qr_morse">Scannen Sie den entsprechenden QR Code, um eine Geheimnachricht anzuhören.</string>
-    <string name="title_qr_rightwrong">Finden Sie den richtigien QR Code, um weiterzukommen.</string>
+    <string name="title_qr_rightwrong">Finden Sie den richtigen QR Code, um weiterzukommen.</string>
 
     <!-- Postcards -->
 

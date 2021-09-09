@@ -132,7 +132,7 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
                 setNeedleRotation();
             }
         });
-        viewModel.getDistanceWaypoint().observe(this, new Observer<Float>() {
+        viewModel.getDistanceStop().observe(this, new Observer<Float>() {
             @Override
             public void onChanged(Float distance) {
                 ((TextView)findViewById(R.id.label_compass_distance)).setText(Math.round(distance) + " Meter");

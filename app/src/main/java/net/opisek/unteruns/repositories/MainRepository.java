@@ -1,5 +1,6 @@
 package net.opisek.unteruns.repositories;
 
+import android.util.Log;
 import android.util.Pair;
 
 import net.opisek.unteruns.models.LocationModel;
@@ -46,18 +47,38 @@ public class MainRepository {
 
     private void initiateLocations() {
         locations = new HashMap<>();
-        addLocation(new LocationModel("ggm",        "Gabelsberger Gymnasium Mainburg",  48.649638113113600d, 11.769270510916570d));
-        addLocation(new LocationModel("eingang",    "Waldeingang",                      48.651969645503144d, 11.767538939916697d));
-        addLocation(new LocationModel("kreuzung",   "Kreuzung",                         48.655620681852994d, 11.768300862382462d));
-        addLocation(new LocationModel("koloman",    "Kapelle St. Koloman",              48.661686910045980d, 11.756360174609688d));
-        addLocation(new LocationModel("see",        "Kleiner See",                      48.667600660245240d, 11.765604095755492d));
-        addLocation(new LocationModel("kapellchen","Kleines Kapellchen",                48.660858476010720d, 11.771331706837545d));
-        addLocation(new LocationModel("ggm2",        "Gabelsberger Gymnasium Mainburg", 48.649638113113600d, 11.769270510916570d));
+        addLocation(new LocationModel("ggm",        "Gabelsberger Gymnasium Mainburg",  48.6497222d, 11.7691667d));
+        addLocation(new LocationModel("eingang",    "Waldeingang",                      48.6519444d, 11.7675000d));
+        addLocation(new LocationModel("kreuzung",   "Kreuzung",                         48.6555556d, 11.7683333d));
+        addLocation(new LocationModel("koloman",    "Kapelle St. Koloman",              48.6619444d, 11.7563889d));
+        addLocation(new LocationModel("see",        "Kleiner See",                      48.6672222d, 11.7652778d));
+        addLocation(new LocationModel("kapellchen","Kleines Kapellchen",                48.6608333d, 11.7708333d));
+        addLocation(new LocationModel("ggm2",        "Gabelsberger Gymnasium Mainburg", 48.6497222d, 11.76916670d));
 
-        addLocation(new LocationModel("house1",        "home waypoint 1", 48.643030d, 11.768704d));
+        addLocation(new LocationModel("house1",48.643030d, 11.768704d));
         addLocation(new LocationModel("house2",        "home waypoint 2", 48.643030d, 11.76882d));
 
-        addLocation(new LocationModel("eingang-kreuzung-1",48.655620681852994d, 11.768300862382462d));
+        addLocation(new LocationModel("waypoint3",48.6494444d, 11.7694444d));
+        addLocation(new LocationModel("waypoint6",48.6513889d, 11.7680556d));
+        addLocation(new LocationModel("waypoint7",48.6516667d, 11.7675000d));
+        addLocation(new LocationModel("waypoint9",48.6519444444444d, 11.7675d));
+        addLocation(new LocationModel("waypoint10",48.6525000d, 11.7694444d));
+        addLocation(new LocationModel("waypoint13",48.6555556d, 11.7683333d));
+        addLocation(new LocationModel("waypoint14",48.6563889d, 11.7683333d));
+        addLocation(new LocationModel("waypoint15",48.6566667d, 11.7683333d));
+        addLocation(new LocationModel("waypoint17",48.6572222d, 11.7680556d));
+        addLocation(new LocationModel("waypoint19",48.6586111d, 11.7663889d));
+        addLocation(new LocationModel("waypoint26",48.6611111d, 11.7561111d));
+        addLocation(new LocationModel("waypoint31",48.6633333333333d, 11.7566666666667d));
+        addLocation(new LocationModel("waypoint36",48.6655555555556d, 11.7575d));
+        addLocation(new LocationModel("waypoint38",48.6666666666667d, 11.7577777777778d));
+        addLocation(new LocationModel("waypoint40",48.6666666666667d, 11.7594444444444d));
+        addLocation(new LocationModel("waypoint41",48.6663888888889d, 11.7622222222222d));
+        addLocation(new LocationModel("waypoint46",48.6672222222222d, 11.7655555555556d));
+        addLocation(new LocationModel("waypoint49",48.665d, 11.7680555555556d));
+        addLocation(new LocationModel("waypoint55",48.6630555555556d, 11.7758333333333d));
+        addLocation(new LocationModel("waypoint56",48.6630555555556d, 11.7783333333333d));
+        addLocation(new LocationModel("waypoint65",48.6605555555556d, 11.7694444444444d));
     }
 
     public LocationModel getLocation(String id) {
@@ -80,35 +101,90 @@ public class MainRepository {
                 new RouteModel("Leicht", "4 Stunden",
                         new WaypointModel[]{
                                 new WaypointModel(getLocation("ggm"), Riddle.RIGHTWRONG),
+
+                                    new WaypointModel(getLocation("waypoint3")),
+                                    new WaypointModel(getLocation("waypoint6")),
+                                    new WaypointModel(getLocation("waypoint7")),
+
                                 new WaypointModel(getLocation("eingang"), Riddle.INPUT),
+
+                                    new WaypointModel(getLocation("waypoint10")),
+                                    new WaypointModel(getLocation("waypoint13")),
+                                    new WaypointModel(getLocation("waypoint14")),
+                                    new WaypointModel(getLocation("waypoint15")),
+                                    new WaypointModel(getLocation("waypoint17")),
+                                    new WaypointModel(getLocation("waypoint19")),
+                                    new WaypointModel(getLocation("waypoint26")),
+
                                 new WaypointModel(getLocation("koloman"), Riddle.POSTCARDS),
+
                                 new WaypointModel(getLocation("kapellchen")),
+
                                 new WaypointModel(getLocation("ggm2"), Riddle.FINAL)
                         }
                 )
         );
         addRoute(
-                new RouteModel("Schwer", "24 Stunden",
+                new RouteModel("Schwer", "sehr langggg",
                         new WaypointModel[]{
                             new WaypointModel(getLocation("ggm")),
-                            new WaypointModel(getLocation("eingang")),
-                            new WaypointModel(getLocation("eingang-kreuzung-1")),
+
+                                new WaypointModel(getLocation("waypoint3")),
+                                new WaypointModel(getLocation("waypoint6")),
+                                new WaypointModel(getLocation("waypoint7")),
+
+                            new WaypointModel(getLocation("eingang"), Riddle.RIGHTWRONG),
+
+                                new WaypointModel(getLocation("waypoint10")),
+
                             new WaypointModel(getLocation("kreuzung")),
-                            new WaypointModel(getLocation("koloman")),
+
+                                new WaypointModel(getLocation("waypoint14")),
+                                new WaypointModel(getLocation("waypoint15")),
+                                new WaypointModel(getLocation("waypoint17")),
+                                new WaypointModel(getLocation("waypoint19")),
+                                new WaypointModel(getLocation("waypoint26")),
+
+                            new WaypointModel(getLocation("koloman"), Riddle.POSTCARDS),
+
+                                new WaypointModel(getLocation("waypoint31")),
+                                new WaypointModel(getLocation("waypoint36")),
+                                new WaypointModel(getLocation("waypoint38")),
+                                new WaypointModel(getLocation("waypoint40")),
+                                new WaypointModel(getLocation("waypoint41")),
+
                             new WaypointModel(getLocation("see")),
-                            new WaypointModel(getLocation("kapellchen"), Riddle.POSTCARDS),
+
+                                new WaypointModel(getLocation("waypoint46")),
+                                new WaypointModel(getLocation("waypoint49")),
+                                new WaypointModel(getLocation("waypoint55")),
+                                new WaypointModel(getLocation("waypoint56")),
+
+                            new WaypointModel(getLocation("kapellchen"), Riddle.INPUT),
+
+                                new WaypointModel(getLocation("waypoint65")),
+                                new WaypointModel(getLocation("waypoint19")),
+                                new WaypointModel(getLocation("waypoint17")),
+                                new WaypointModel(getLocation("waypoint15")),
+                                new WaypointModel(getLocation("waypoint14")),
+                                new WaypointModel(getLocation("waypoint13")),
+                                new WaypointModel(getLocation("waypoint9")),
+                                new WaypointModel(getLocation("waypoint7")),
+                                new WaypointModel(getLocation("waypoint6")),
+                                new WaypointModel(getLocation("waypoint3")),
+
                             new WaypointModel(getLocation("ggm2"), Riddle.FINAL)
                         }
                 )
         );
-        addRoute(
+        /*addRoute(
                 new RouteModel("Test", "test",
                         new WaypointModel[]{
                                 new WaypointModel(getLocation("house1"), Riddle.INPUT),
                                 new WaypointModel(getLocation("house2"), Riddle.FINAL)
                         }
                 )
-        );
+        );*/
     }
 
     public ArrayList<Pair<String, String>> getRoutes() {
@@ -146,6 +222,15 @@ public class MainRepository {
             }
         }
         return result;
+    }
+
+    public float getDistanceUntilNextStop() {
+        float dist = 0f;
+        for (int i = routeProgress+1; i < route.waypoints.length-1; i++) {
+            if (!route.waypoints[i].intermediate) break;
+            dist += route.waypoints[i].location.location.distanceTo(route.waypoints[i+1].location.location);
+        }
+        return dist;
     }
 
     public WaypointModel currentStop() {

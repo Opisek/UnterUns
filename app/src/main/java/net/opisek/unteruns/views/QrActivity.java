@@ -144,8 +144,8 @@ public class QrActivity extends AppCompatActivity {
         TextView title = findViewById(R.id.text_qr_title);
         switch(myQrType) {
             case ROUTE:
-                title.setText(R.string.title_qr_route);
                 viewModel = ViewModelProviders.of(this).get(RouteQrViewModel.class);
+                title.setText(getResources().getString(R.string.title_qr_route).replace("%0%",((RouteQrViewModel)viewModel).getStationName()));
                 observerRiddle(((RouteQrViewModel)viewModel).getRiddle());
                 ((RouteQrViewModel)viewModel).getLostWaypoint().observe(this, new Observer<Boolean>() {
                     @Override

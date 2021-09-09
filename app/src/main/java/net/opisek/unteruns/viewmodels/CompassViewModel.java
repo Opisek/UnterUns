@@ -1,6 +1,7 @@
 package net.opisek.unteruns.viewmodels;
 
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -38,10 +39,16 @@ public class CompassViewModel extends ViewModel {
             @Override
             public void onGpsUpdated() {
                 if (compassActive) {
-                    getBearing().setValue(gpsRepository.getBearing(nextWaypoint.location.location));
-                    getDistanceWaypoint().setValue(gpsRepository.getDistance(nextWaypoint.location.location));
+                    boolean isFinalWaypoint = nextWaypoint == nextStop;
 
-                    if (getDistanceWaypoint().getValue() <= 5f && System.currentTimeMillis() - activityStartTimestamp > 1000) {
+                    getBearing().setValue(gpsRepository.getBearing(nextWaypoint.location.location));
+
+                    float dist = gpsRepository.getDistance(nextWaypoint.location.location);
+                    getDistanceWaypoint().setValue(dist);
+                    if (!isFinalWaypoint) dist += mainRepository.getDistanceUntilNextStop();
+                    getDistanceStop().setValue(dist);
+
+                    if (getDistanceWaypoint().getValue() <= (isFinalWaypoint ? 5f : 10f) && System.currentTimeMillis() - activityStartTimestamp > 1000) {
                         mainRepository.reachedWaypoint();
                         if (nextWaypoint == nextStop) {
                             getStopReached().setValue(true);

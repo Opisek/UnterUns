@@ -43,6 +43,10 @@ public class RouteQrViewModel extends QrViewModel {
         });
     }
 
+    public String getStationName() {
+        return myStop.location.name;
+    }
+
     private MutableLiveData<Boolean> lostWaypoint;
     public MutableLiveData<Boolean> getLostWaypoint() {
         if(lostWaypoint == null) {
