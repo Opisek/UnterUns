@@ -40,7 +40,7 @@
 
     <!-- QR -->
 
-    <string name="title_qr_route">Scannen Sie den QR Code, um fortzufolgen.</string>
+    <string name="title_qr_route">Willkommen an der Station "§0"!\nScannen Sie den QR Code auf dem Behälter.</string>
     <string name="title_qr_continue">Scannen Sie den letzten QR Code, um dort wieder anzufangen.</string>
     <string name="title_qr_test">QR Tester</string>
     <string name="title_qr_morse">Scannen Sie den entsprechenden QR Code, um eine Geheimnachricht anzuhören.</string>

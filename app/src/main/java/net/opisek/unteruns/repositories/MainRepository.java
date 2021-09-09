@@ -54,6 +54,9 @@ public class MainRepository {
         addLocation(new LocationModel("kapellchen","Kleines Kapellchen",                48.660858476010720d, 11.771331706837545d));
         addLocation(new LocationModel("ggm2",        "Gabelsberger Gymnasium Mainburg", 48.649638113113600d, 11.769270510916570d));
 
+        addLocation(new LocationModel("house1",        "home waypoint 1", 48.643030d, 11.768704d));
+        addLocation(new LocationModel("house2",        "home waypoint 2", 48.643030d, 11.76882d));
+
         addLocation(new LocationModel("eingang-kreuzung-1",48.655620681852994d, 11.768300862382462d));
     }
 
@@ -95,6 +98,14 @@ public class MainRepository {
                             new WaypointModel(getLocation("see")),
                             new WaypointModel(getLocation("kapellchen"), Riddle.POSTCARDS),
                             new WaypointModel(getLocation("ggm2"), Riddle.FINAL)
+                        }
+                )
+        );
+        addRoute(
+                new RouteModel("Test", "test",
+                        new WaypointModel[]{
+                                new WaypointModel(getLocation("house1"), Riddle.INPUT),
+                                new WaypointModel(getLocation("house2"), Riddle.FINAL)
                         }
                 )
         );
@@ -301,6 +312,9 @@ public class MainRepository {
         addQrCode(new RouteQrModel("11558407-bcd0-4dd0-9bf8-a2766f750a08", getLocation("see")));
         addQrCode(new RouteQrModel("a7eecb31-a434-4bdb-b1ea-615193db4921", getLocation("kapellchen")));
         addQrCode(new RouteQrModel("59f3796e-4790-40c7-b360-6e5e1d43ef2a", getLocation("ggm2")));
+
+        addQrCode(new RouteQrModel("e6c99c55-7b73-45c5-b8d7-30a6ec6c3f07", getLocation("house1")));
+        addQrCode(new RouteQrModel("81837642-f990-4d3b-b84c-1ca7d710ab5f", getLocation("house2")));
 
         addQrCode(new MorseQrModel("63b6c8e4-3ac2-4db0-bcd3-ac0dfd695142", getMorseCode("frankfurt")));
         addQrCode(new MorseQrModel("f0b390db-5ddc-4b00-8a1a-872011d9eb43", getMorseCode("london")));

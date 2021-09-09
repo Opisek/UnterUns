@@ -34,7 +34,7 @@ public class RouteQrViewModel extends QrViewModel {
         gpsRepository.setGpsListener(new GpsRepository.GpsListener() {
             @Override
             public void onGpsUpdated() {
-                if (gpsRepository.getDistance(myStop.location.location) >= 15f && System.currentTimeMillis() - activityStartTimestamp > 1000) {
+                if (gpsRepository.getDistance(myStop.location.location) >= 30f && System.currentTimeMillis() - activityStartTimestamp > 1000) {
                     //Log.v("RouteQrViewModel", myStop.location.name);
                     mainRepository.lostWaypoint();
                     lostWaypoint.setValue(true);

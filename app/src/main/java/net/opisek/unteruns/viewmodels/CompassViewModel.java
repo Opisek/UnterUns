@@ -41,7 +41,7 @@ public class CompassViewModel extends ViewModel {
                     getBearing().setValue(gpsRepository.getBearing(nextWaypoint.location.location));
                     getDistanceWaypoint().setValue(gpsRepository.getDistance(nextWaypoint.location.location));
 
-                    if (getDistanceWaypoint().getValue() <= 3f && System.currentTimeMillis() - activityStartTimestamp > 1000) {
+                    if (getDistanceWaypoint().getValue() <= 5f && System.currentTimeMillis() - activityStartTimestamp > 1000) {
                         mainRepository.reachedWaypoint();
                         if (nextWaypoint == nextStop) {
                             getStopReached().setValue(true);

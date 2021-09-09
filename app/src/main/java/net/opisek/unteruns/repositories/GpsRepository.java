@@ -12,7 +12,7 @@ import static android.content.ContentValues.TAG;
 
 public class GpsRepository implements LocationListener {
 
-    GpsListener listener;
+    private static GpsListener listener;
     public interface GpsListener {
         public void onGpsUpdated();
     }
