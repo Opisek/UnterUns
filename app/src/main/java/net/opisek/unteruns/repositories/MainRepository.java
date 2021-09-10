@@ -1,6 +1,5 @@
 package net.opisek.unteruns.repositories;
 
-import android.util.Log;
 import android.util.Pair;
 
 import net.opisek.unteruns.models.LocationModel;
@@ -180,7 +179,7 @@ public class MainRepository {
         /*addRoute(
                 new RouteModel("Test", "test",
                         new WaypointModel[]{
-                                new WaypointModel(getLocation("house1"), Riddle.INPUT),
+                                //new WaypointModel(getLocation("house1"), Riddle.INPUT),
                                 new WaypointModel(getLocation("house2"), Riddle.FINAL)
                         }
                 )
@@ -209,7 +208,7 @@ public class MainRepository {
     }
 
     public WaypointModel nextWaypoint() {
-        if (routeProgress >= route.waypoints.length-1) return null;
+        if (routeProgress+1 >= route.waypoints.length) return null;
         return route.waypoints[routeProgress+1];
     }
 
@@ -235,7 +234,6 @@ public class MainRepository {
 
     public WaypointModel currentStop() {
         if (routeProgress == -1) return null;
-        //Log.v("repository", route.waypoints[routeProgress].location.name);
         return route.waypoints[routeProgress];
     }
 
@@ -421,8 +419,8 @@ public class MainRepository {
         addQrCode(new RightWrongQrModel("880b68c3-fe55-4ac6-bffc-40bbf93d3730", false));
     }
 
-    public QrModel getQrCode(String id) {
-        return qrCodes.get(UUID.fromString(id));
+    public QrModel getQrCode(UUID id) {
+        return qrCodes.get(id);
     }
 
     // ==============================================================================================================================================================================================

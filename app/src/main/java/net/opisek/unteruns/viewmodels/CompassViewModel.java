@@ -45,10 +45,11 @@ public class CompassViewModel extends ViewModel {
 
                     float dist = gpsRepository.getDistance(nextWaypoint.location.location);
                     getDistanceWaypoint().setValue(dist);
-                    if (!isFinalWaypoint) dist += mainRepository.getDistanceUntilNextStop();
-                    getDistanceStop().setValue(dist);
+                    float distStop = dist;
+                    if (!isFinalWaypoint) distStop += mainRepository.getDistanceUntilNextStop();
+                    getDistanceStop().setValue(distStop);
 
-                    if (getDistanceWaypoint().getValue() <= (isFinalWaypoint ? 5f : 10f) && System.currentTimeMillis() - activityStartTimestamp > 1000) {
+                    if (((dist <= 10f && !isFinalWaypoint) || distStop <= 5f) && System.currentTimeMillis() - activityStartTimestamp > 1000) {
                         mainRepository.reachedWaypoint();
                         if (nextWaypoint == nextStop) {
                             getStopReached().setValue(true);

@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModel;
 import net.opisek.unteruns.models.QrModel;
 import net.opisek.unteruns.repositories.MainRepository;
 
+import java.util.UUID;
+
 public abstract class QrViewModel extends ViewModel {
 
     private long throttle = 0;
@@ -21,13 +23,15 @@ public abstract class QrViewModel extends ViewModel {
             return;
         }*/
         if (time - throttle >= 3000) {
-            QrModel res = MainRepository.getInstance().getQrCode(input);
-            if (res != null) {
-                throttle = time;
-                this.onQrScan(res);
-            } else {
-                setCorrectQr(false);
-            }
+            try {
+                QrModel res = MainRepository.getInstance().getQrCode(UUID.fromString(input));
+                if (res != null) {
+                    throttle = time;
+                    this.onQrScan(res);
+                } else {
+                    setCorrectQr(false);
+                }
+            } catch (java.lang.IllegalArgumentException e) {}
         }
     }
 
