@@ -3,6 +3,7 @@ package net.opisek.unteruns.views;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -10,11 +11,16 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 
 import net.opisek.unteruns.R;
+import net.opisek.unteruns.repositories.MainRepository;
 import net.opisek.unteruns.viewmodels.InputQuestionViewModel;
 import net.opisek.unteruns.viewmodels.VoteRiddleViewModel;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class VoteRiddleActivity extends RiddleActivity {
 
@@ -29,12 +35,17 @@ public class VoteRiddleActivity extends RiddleActivity {
 
         findViewById(R.id.button_vote_red).setOnClickListener(new View.OnClickListener(){
             @Override public void onClick(View v) {
-                voteRed();
+                changeVoteTo(viewModel.getVote("Red"));
+            }
+        });
+        findViewById(R.id.button_vote_pink).setOnClickListener(new View.OnClickListener(){
+            @Override public void onClick(View v) {
+                changeVoteTo(viewModel.getVote("Pink"));
             }
         });
         findViewById(R.id.button_vote_white).setOnClickListener(new View.OnClickListener(){
             @Override public void onClick(View v) {
-                voteWhite();
+                changeVoteTo(viewModel.getVote("White"));
             }
         });
         findViewById(R.id.button_vote_confirm).setOnClickListener(new View.OnClickListener(){
@@ -42,21 +53,36 @@ public class VoteRiddleActivity extends RiddleActivity {
                 riddleSolved();
             }
         });
+
+        vote = new int[2];
     }
 
-    private String vote;
+    private int[] vote;
 
-    private void voteRed() {
-        vote = "Red";
+    private void changeVoteTo(int newVote) {
+        if (vote[1] == newVote) return;
+        vote[0] = vote[1];
+        vote[1] = newVote;
+
+        updateButtonColors();
     }
-    private void voteWhite() {
-        vote = "White";
+
+    private void updateButtonColors() {
+        int selectedColor = ContextCompat.getColor(getApplicationContext(), R.color.colorBackgroundLight);
+        int normalColor = ContextCompat.getColor(getApplicationContext(), R.color.colorBackgroundDark);
+
+        if (voteToList().contains(MainRepository.getInstance().redVote)) findViewById(R.id.button_vote_red).setBackgroundColor(selectedColor);
+        else findViewById(R.id.button_vote_red).setBackgroundColor(normalColor);
+        if (voteToList().contains(MainRepository.getInstance().pinkVote)) findViewById(R.id.button_vote_pink).setBackgroundColor(selectedColor);
+        else findViewById(R.id.button_vote_pink).setBackgroundColor(normalColor);
+        if (voteToList().contains(MainRepository.getInstance().whiteVote)) findViewById(R.id.button_vote_white).setBackgroundColor(selectedColor);
+        else findViewById(R.id.button_vote_white).setBackgroundColor(normalColor);
     }
 
     @Override
     public void riddleSolved() {
-        if (vote == null || vote.equals("")) return;
-        boolean correct = ((VoteRiddleViewModel)viewModel).isVoteCorrect(vote);
+        if (vote == null || vote[0] == 0 || vote[1] == 0) return;
+        boolean correct = ((VoteRiddleViewModel)viewModel).isVoteCorrect(voteToList());
         Intent intent = new Intent(this, VoteResultActivity.class);
         intent.putExtra("correct", correct);
 
@@ -67,6 +93,13 @@ public class VoteRiddleActivity extends RiddleActivity {
 
         startActivity(intent);
         finish();
+    }
+
+    private ArrayList<Integer> voteToList() {
+        ArrayList<Integer> voteList = new ArrayList<>();
+        voteList.add(vote[0]);
+        voteList.add(vote[1]);
+        return voteList;
     }
 
     private void mainMenu() {

@@ -72,9 +72,10 @@
 
     <!-- Vote -->
 
-    <string name="title_vote_riddle">Wählen sie den Mörder, um weiterzukommen.</string>
+    <string name="title_vote_riddle">Wählen sie die beiden Mörder, um weiterzukommen.</string>
     <string name="button_vote_red">Rot</string>
     <string name="button_vote_white">Weiß</string>
+    <string name="button_vote_pink">Pink</string>
     <string name="button_vote_confirm">Weiter</string>
 
     <string name="title_vote_result">Danke fürs Spielen!</string>

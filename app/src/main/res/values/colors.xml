@@ -5,6 +5,7 @@
     <color name="colorForegroundDark">#000000</color>
 
     <color name="colorBackgroundDark">#363638</color>
+    <color name="colorBackgroundSelect">#3C3C3F</color>
     <color name="colorBackgroundLight">#DCE7E7</color>
     <color name="colorBackgroundWrong">#a11818</color>
 

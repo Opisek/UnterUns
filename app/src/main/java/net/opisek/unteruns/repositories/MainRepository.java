@@ -32,6 +32,7 @@ public class MainRepository {
         initializePostcardQuestions();
         initializeInputQuestions();
         initializeQrCodes();
+        initializeVote();
     }
 
     // ==============================================================================================================================================================================================
@@ -436,7 +437,16 @@ public class MainRepository {
         FINAL
     }
 
-    public final String correctVote = "Red";
+    private void initializeVote() {
+        correctVote = new int[2];
+        correctVote[0] = whiteVote;
+        correctVote[1] = pinkVote;
+    }
+
+    public final int whiteVote = 1;
+    public final int redVote = 2;
+    public final int pinkVote = 3;
+    public int[] correctVote;
 
     // ==============================================================================================================================================================================================
     //endregion

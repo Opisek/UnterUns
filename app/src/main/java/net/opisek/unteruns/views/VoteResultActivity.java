@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -22,6 +23,9 @@ public class VoteResultActivity extends AppCompatActivity {
         boolean correct = getIntent().getExtras().getBoolean("correct");
         String result = correct ? getResources().getString(R.string.label_vote_right) : getResources().getString(R.string.label_vote_wrong);
         ((TextView)findViewById(R.id.textview_result)).setText(result);
+
+        if (correct) ((ImageView)findViewById(R.id.imageview_result)).setImageResource(R.drawable.endscreen_win);
+        else ((ImageView)findViewById(R.id.imageview_result)).setImageResource(R.drawable.endscreen_lose);
 
         findViewById(R.id.button_tomenu).setOnClickListener(new View.OnClickListener(){
             @Override public void onClick(View v) {

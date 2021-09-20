@@ -40,6 +40,21 @@
             android:textSize="25sp" />
 
         <Button
+            android:id="@+id/button_vote_pink"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+
+            android:layout_weight="1"
+
+            android:background="@color/colorBackgroundDark"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/button_vote_pink"
+            android:textAlignment="center"
+            android:textColor="@color/colorForegroundLight"
+            android:textSize="25sp" />
+
+        <Button
             android:id="@+id/button_vote_white"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
