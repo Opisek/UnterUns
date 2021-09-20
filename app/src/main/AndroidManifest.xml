@@ -20,6 +20,7 @@
         <activity
             android:name=".views.MenuActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,16 +30,19 @@
         <activity
             android:name=".views.RoutesActivity"
             android:label="Routen"
+            android:screenOrientation="portrait"
             android:parentActivityName=".views.MenuActivity">
         </activity>
         <activity
             android:name=".views.CreditsActivity"
             android:label="Credits"
+            android:screenOrientation="portrait"
             android:parentActivityName=".views.MenuActivity">
         </activity>
         <activity
             android:name=".views.CheatMenuActivity"
             android:label="Cheat Menu"
+            android:screenOrientation="portrait"
             android:parentActivityName=".views.MenuActivity">
         </activity>
 
@@ -46,10 +50,12 @@
 
         <activity
             android:name=".views.CompassActivity"
+            android:screenOrientation="portrait"
             android:label="Kompass">
         </activity>
         <activity
             android:name=".views.QrActivity"
+            android:screenOrientation="portrait"
             android:label="Qr Scanner">
         </activity>
 
@@ -57,15 +63,18 @@
 
         <activity
             android:name=".views.PostcardsActivity"
+            android:screenOrientation="portrait"
             android:label="Postkarten Rätsel">
         </activity>
         <activity
             android:name=".views.PostcardQuestionsActivity"
             android:label="Postkarten Rätsel"
+            android:screenOrientation="portrait"
             android:parentActivityName=".views.PostcardsActivity">
         </activity>
         <activity
             android:name=".views.PostcardQuestionActivity"
+            android:screenOrientation="portrait"
             android:label="Postkarten Rätsel"
             android:parentActivityName=".views.PostcardQuestionsActivity">
         </activity>
@@ -74,16 +83,24 @@
 
         <activity
             android:name=".views.InputQuestionActivity"
+            android:screenOrientation="portrait"
             android:label="Rätsel Eingabefeld">
         </activity>
 
         <!-- VoteRiddle -->
         <activity
             android:name=".views.VoteRiddleActivity"
+            android:screenOrientation="portrait"
             android:label="Imposter Wahl Rätsel">
         </activity>
         <activity
+            android:name=".views.StoryReadActivity"
+            android:screenOrientation="portrait"
+            android:label="End Text">
+        </activity>
+        <activity
             android:name=".views.VoteResultActivity"
+            android:screenOrientation="portrait"
             android:label="Imposter Wahl Ergebnisse">
         </activity>
 

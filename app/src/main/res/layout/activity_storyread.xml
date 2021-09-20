@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/stars">
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:text="@string/title_vote_readstory"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorForegroundLight"
+        android:layout_marginBottom="100dp"
+        android:padding="5dp"/>
+
+    <Button
+        android:id="@+id/button_vote_read_continue"
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_marginTop="200dp"
+
+        android:layout_weight="1"
+
+        android:background="@color/colorBackgroundDark"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/button_vote_confirm"
+        android:textAlignment="center"
+        android:textColor="@color/colorForegroundLight"
+        android:textSize="25sp" />
+
+</LinearLayout>

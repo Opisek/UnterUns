@@ -68,7 +68,7 @@ public class VoteRiddleActivity extends RiddleActivity {
     }
 
     private void updateButtonColors() {
-        int selectedColor = ContextCompat.getColor(getApplicationContext(), R.color.colorBackgroundLight);
+        int selectedColor = ContextCompat.getColor(getApplicationContext(), R.color.colorBackgroundSelect);
         int normalColor = ContextCompat.getColor(getApplicationContext(), R.color.colorBackgroundDark);
 
         if (voteToList().contains(MainRepository.getInstance().redVote)) findViewById(R.id.button_vote_red).setBackgroundColor(selectedColor);
@@ -83,7 +83,7 @@ public class VoteRiddleActivity extends RiddleActivity {
     public void riddleSolved() {
         if (vote == null || vote[0] == 0 || vote[1] == 0) return;
         boolean correct = ((VoteRiddleViewModel)viewModel).isVoteCorrect(voteToList());
-        Intent intent = new Intent(this, VoteResultActivity.class);
+        Intent intent = new Intent(this, StoryReadActivity.class);
         intent.putExtra("correct", correct);
 
         SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.key_preferences), Context.MODE_PRIVATE);

@@ -78,6 +78,8 @@
     <string name="button_vote_pink">Pink</string>
     <string name="button_vote_confirm">Weiter</string>
 
+    <string name="title_vote_readstory">Lesen sie die Geschichte zuende.</string>
+
     <string name="title_vote_result">Danke fürs Spielen!</string>
     <string name="label_vote_right">Hurray :D</string>
     <string name="label_vote_wrong">Schade Marmelade</string>
