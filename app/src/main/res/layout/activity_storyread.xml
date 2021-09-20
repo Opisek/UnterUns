@@ -13,14 +13,21 @@
         android:textSize="25sp"
         android:background="@color/colorPrimary"
         android:textColor="@color/colorForegroundLight"
-        android:layout_marginBottom="100dp"
         android:padding="5dp"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:paddingTop="100dp"
+        android:paddingBottom="100dp">
     <Button
         android:id="@+id/button_vote_read_continue"
         android:layout_width="fill_parent"
         android:layout_height="0px"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="80dp"
 
         android:layout_weight="1"
 
@@ -31,5 +38,6 @@
         android:textAlignment="center"
         android:textColor="@color/colorForegroundLight"
         android:textSize="25sp" />
+    </LinearLayout>
 
 </LinearLayout>
