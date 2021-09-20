@@ -87,12 +87,7 @@
 
     <!-- Lorem Ipsum -->
 
-    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet nibh eget mi vestibulum convallis. In vehicula lacus at enim dapibus varius vitae at nisl. Mauris id elementum tortor. Nulla vel tristique purus. Proin interdum ultrices nibh, vitae efficitur tortor mollis vitae. Vestibulum a fermentum mi, vitae venenatis mi. Aenean consectetur rutrum lorem. Praesent urna ipsum, varius a dapibus ac, faucibus pretium neque. Nulla ullamcorper sollicitudin metus. Phasellus et eros erat. Donec ac volutpat risus.
-
-Nullam bibendum arcu quis aliquam congue. Donec ullamcorper tincidunt sapien sit amet cursus. Integer semper nunc vitae euismod hendrerit. Nullam vel nisl vel magna ullamcorper pulvinar sit amet tristique enim. Integer vel risus id odio faucibus congue. Nullam sed mi est. Maecenas consequat turpis ut nisi egestas, sed porta metus cursus.
-
-Vestibulum vitae lacus ex. Maecenas condimentum est id fringilla hendrerit. Praesent id pretium est. Aliquam in gravida est. Mauris sit amet luctus ante. Nullam a venenatis sem. Curabitur vitae purus pretium, hendrerit velit in, efficitur metus.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at malesuada turpis. Mauris id rutrum nisl, quis malesuada enim. Nulla facilisi. Nulla eget ultrices elit, et facilisis ipsum. Donec ac leo sed elit eleifend pharetra vel id nisl. Cras vehicula consequat velit eu luctus. Sed posuere arcu nisi, eu porttitor dui venenatis in. Nulla facilisi. Nam viverra neque vitae mi consectetur sagittis.</string>
+    <string name="lorem_ipsum">\"Unter Uns\"\n\nEin Projekt des P-Seminars "Geocaching" unter Leitung von Thomas Weinhold in dem Abiturjahrgang 2020-2022.\n\nBeteiligt an dem Projekt waren:\n- Arslan Kader\n- Darowski Kacper\n- Hoffman Simon\n- Huber Korbinian\n- Mayer Johannes\n- Rauscher Sebastian\n- Schilling Simon\n- Schwarz Anna\n\nDie App wurde programmiert durch:\n- Darowski Kacper\n- Huber Korbinian\n\nDie Story wurde geschrieben durch:\n- Arslan Kader\n- Hoffman Simon\n- Rauscher Sebastian\n\nAlle Grafiken wurden erstellt durch:\n- Arslan Kader\n- Darowski Kacper\n- Huber Korbinian\n\nDie Route wurde zusammengestellt durch:\n- Hoffman Simon\n- Mayer Johannes\n- Schilling Simon\n- Schwarz Anna\n\nDie Rätseln wurden erstellt durch:\n- Darowski Kacper\n- Schilling Simon\n- Schwarz Anna\n\nDer QR Code Scanner wurde ermöglicht durch das folgende unter MIT Lizenz stehende Projekt:\ngithub.com/yuriy-budiyev/code-scanner
+    </string>
 
 </resources>
