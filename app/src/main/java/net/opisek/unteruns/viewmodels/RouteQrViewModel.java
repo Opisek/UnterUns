@@ -24,6 +24,8 @@ public class RouteQrViewModel extends QrViewModel {
 
     private boolean waypointLost;
 
+    private float distanceStopLose;
+
     public RouteQrViewModel() {
         activityStartTimestamp = System.currentTimeMillis();
         mainRepository = MainRepository.getInstance();
@@ -38,7 +40,7 @@ public class RouteQrViewModel extends QrViewModel {
             @Override
             public void onGpsUpdated() {
                 //Log.v("RouteQrViewModel", String.valueOf(gpsRepository.getDistance(myStop.location.location)));
-                if (gpsRepository.getDistance(myStop.location.location) >= 25f && System.currentTimeMillis() - activityStartTimestamp > 1000 && !waypointLost) {
+                if (gpsRepository.getDistance(myStop.location.location) >= mainRepository.distanceStopLose() && System.currentTimeMillis() - activityStartTimestamp > 1000 && !waypointLost) {
                     waypointLost = true;
                     mainRepository.lostWaypoint();
                     lostWaypoint.setValue(true);

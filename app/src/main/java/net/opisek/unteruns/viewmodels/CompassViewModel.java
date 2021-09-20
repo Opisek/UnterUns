@@ -49,7 +49,7 @@ public class CompassViewModel extends ViewModel {
                     if (!isFinalWaypoint) distStop += mainRepository.getDistanceUntilNextStop();
                     getDistanceStop().setValue(distStop);
 
-                    if (((dist <= 10f && !isFinalWaypoint) || distStop <= 5f) && System.currentTimeMillis() - activityStartTimestamp > 1000) {
+                    if (((dist <= mainRepository.distanceWaypointFind() && !isFinalWaypoint) || distStop <= mainRepository.distanceStopFind()) && System.currentTimeMillis() - activityStartTimestamp > 1000) {
                         mainRepository.reachedWaypoint();
                         if (nextWaypoint == nextStop) {
                             getStopReached().setValue(true);

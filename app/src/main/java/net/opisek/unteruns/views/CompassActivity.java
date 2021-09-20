@@ -116,6 +116,8 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
         }
     }
 
+    private float distanceWaypoint;
+
     @SuppressWarnings({"MissingPermission"})
     private void permsPassed() {
         LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
@@ -132,10 +134,18 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
                 setNeedleRotation();
             }
         });
+        viewModel.getDistanceWaypoint().observe(this, new Observer<Float>() {
+            @Override
+            public void onChanged(Float distance) {
+                distanceWaypoint = distance;
+            }
+        });
         viewModel.getDistanceStop().observe(this, new Observer<Float>() {
             @Override
             public void onChanged(Float distance) {
-                ((TextView)findViewById(R.id.label_compass_distance)).setText(Math.round(distance) + " Meter");
+                String text = Math.round(distance) + " Meter";
+                if (distance != distanceWaypoint) text = Math.round(distanceWaypoint) + " Meter | " + text;
+                ((TextView)findViewById(R.id.label_compass_distance)).setText(text);
             }
         });
         viewModel.getNameStop().observe(this, new Observer<String>() {
