@@ -60,10 +60,15 @@ public class VoteRiddleActivity extends RiddleActivity {
     private int[] vote;
 
     private void changeVoteTo(int newVote) {
-        if (vote[1] == newVote) return;
-        vote[0] = vote[1];
-        vote[1] = newVote;
-
+        if (vote[0] == newVote) {
+            vote[0] = vote[1];
+            vote[1] = 0;
+        } else if (vote[1] == newVote) {
+            vote[1] = 0;
+        } else {
+            if (vote[1] != 0) vote[0] = vote[1];
+            vote[1] = newVote;
+        }
         updateButtonColors();
     }
 
