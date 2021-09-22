@@ -78,6 +78,7 @@ public class RouteQrViewModel extends QrViewModel {
             setCorrectQr(false);
             return;
         }
+        gpsRepository.setGpsListener(null);
         riddle.setValue(myStop.riddle);
     }
 }

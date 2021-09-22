@@ -320,11 +320,9 @@ public class QrActivity extends AppCompatActivity {
         });
     }
     private void handleRiddle(MainRepository.Riddle riddle) {
-        //Log.v("qr", "stop2");
         camDisabled = true;
         scanner.stopPreview();
         scanner.releaseResources();
-        //Log.v("qr", "BIN ANGEKOMMEN!");
         Intent intent;
         switch(riddle) {
             case POSTCARDS:
@@ -357,7 +355,6 @@ public class QrActivity extends AppCompatActivity {
     }
 
     private void lostWaypoint() {
-        //Log.v("qr", "stop1");
         camDisabled = true;
         scanner.stopPreview();
         scanner.releaseResources();
