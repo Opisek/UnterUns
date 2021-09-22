@@ -1,5 +1,6 @@
 package net.opisek.unteruns.repositories;
 
+import android.util.Log;
 import android.util.Pair;
 
 import net.opisek.unteruns.models.LocationModel;
@@ -207,11 +208,10 @@ public class MainRepository {
                                     new WaypointModel(getLocation("w7")),
                                     new WaypointModel(getLocation("w11")),
                                     new WaypointModel(getLocation("w14")),
-                                    new WaypointModel(getLocation("w68")),
-                                    new WaypointModel(getLocation("w69")),
-                                    // add more waypoints here
-                                    new WaypointModel(getLocation("w78")),
-                                    new WaypointModel(getLocation("w79")),
+                                    new WaypointModel(getLocation("w8")),
+                                    new WaypointModel(getLocation("w10")),
+                                    new WaypointModel(getLocation("w5")),
+                                    new WaypointModel(getLocation("w3")),
                                     new WaypointModel(getLocation("w2")),
                                     new WaypointModel(getLocation("w9")),
                                     new WaypointModel(getLocation("w82")),
@@ -284,11 +284,10 @@ public class MainRepository {
                                 new WaypointModel(getLocation("w7")),
                                 new WaypointModel(getLocation("w11")),
                                 new WaypointModel(getLocation("w14")),
-                                new WaypointModel(getLocation("w68")),
-                                new WaypointModel(getLocation("w69")),
-                                // add more waypoints here
-                                new WaypointModel(getLocation("w78")),
-                                new WaypointModel(getLocation("w79")),
+                                new WaypointModel(getLocation("w8")),
+                                new WaypointModel(getLocation("w10")),
+                                new WaypointModel(getLocation("w5")),
+                                new WaypointModel(getLocation("w3")),
                                 new WaypointModel(getLocation("w2")),
                                 new WaypointModel(getLocation("w9")),
                                 new WaypointModel(getLocation("w82")),
@@ -387,7 +386,7 @@ public class MainRepository {
         return 10f;
     }
     public float distanceStopLose() {
-        return 25f;
+        return 50f;
     }
 
     // ==============================================================================================================================================================================================
