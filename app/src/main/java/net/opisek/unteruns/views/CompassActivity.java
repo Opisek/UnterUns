@@ -177,7 +177,6 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
     }
 
     private void saveProgress(int progress) {
-        Log.v("test", "progress saved: " + progress);
         SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.key_preferences), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt("routeProgress", progress);
