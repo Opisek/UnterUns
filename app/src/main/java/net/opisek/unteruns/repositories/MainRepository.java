@@ -197,7 +197,7 @@ public class MainRepository {
                                     new WaypointModel(getLocation("w49")),
                                     new WaypointModel(getLocation("w50")),
 
-                                new WaypointModel(getLocation("kapellchen"), Riddle.INPUT),
+                                new WaypointModel(getLocation("kapellchen"), Riddle.CROSSWORD),
 
                                     new WaypointModel(getLocation("w64")),
                                     new WaypointModel(getLocation("w65")),
@@ -265,7 +265,7 @@ public class MainRepository {
                                 new WaypointModel(getLocation("w33")),
                                 new WaypointModel(getLocation("w55")),
 
-                            new WaypointModel(getLocation("see")),
+                            new WaypointModel(getLocation("see"), Riddle.NAVIGATION),
 
                                 new WaypointModel(getLocation("w56")),
                                 new WaypointModel(getLocation("w57")),
@@ -273,7 +273,7 @@ public class MainRepository {
                                 new WaypointModel(getLocation("w59")),
                                 new WaypointModel(getLocation("w60")),
 
-                            new WaypointModel(getLocation("kapellchen"), Riddle.INPUT),
+                            new WaypointModel(getLocation("kapellchen"), Riddle.CROSSWORD),
 
                                 new WaypointModel(getLocation("w64")),
                                 new WaypointModel(getLocation("w65")),
@@ -487,7 +487,8 @@ public class MainRepository {
     // ==============================================================================================================================================================================================
 
     public enum inputQuestionID {
-        CROSSWORD
+        CROSSWORD,
+        NAVIGATION
     };
 
     private HashMap<inputQuestionID, String> inputQuestionAnswers;
@@ -495,6 +496,7 @@ public class MainRepository {
     private void initializeInputQuestions() {
         inputQuestionAnswers = new HashMap<>();
         inputQuestionAnswers.put(inputQuestionID.CROSSWORD, "Astronaut");
+        inputQuestionAnswers.put(inputQuestionID.NAVIGATION, "4.2");
     }
 
     public String getInputQuestionAnswer(inputQuestionID id) { return inputQuestionAnswers.get(id); }
@@ -553,7 +555,8 @@ public class MainRepository {
     public enum Riddle {
         NONE,
         POSTCARDS,
-        INPUT,
+        CROSSWORD,
+        NAVIGATION,
         RIGHTWRONG,
         FINAL
     }

@@ -328,9 +328,13 @@ public class QrActivity extends AppCompatActivity {
             case POSTCARDS:
                 intent = new Intent(this, PostcardsActivity.class);
                 break;
-            case INPUT:
+            case CROSSWORD:
                 intent = new Intent(this, InputQuestionActivity.class);
                 intent.putExtra("id", MainRepository.inputQuestionID.CROSSWORD);
+                break;
+            case NAVIGATION:
+                intent = new Intent(this, InputQuestionActivity.class);
+                intent.putExtra("id", MainRepository.inputQuestionID.NAVIGATION);
                 break;
             case RIGHTWRONG:
                 intent = new Intent(this, QrActivity.class);

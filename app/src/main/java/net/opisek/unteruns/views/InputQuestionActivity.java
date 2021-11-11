@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PersistableBundle;
+import android.text.InputType;
 import android.util.Log;
 import android.util.Pair;
 import android.view.KeyEvent;
@@ -58,6 +59,9 @@ public class InputQuestionActivity extends RiddleActivity {
 
         defaultTextFieldText = getResources().getString(R.string.field_inputquestion_answer);
         textField = findViewById(R.id.field_inputquestion_answer);
+
+        if (viewModel.isNumber()) textField.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+
         textField.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
