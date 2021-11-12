@@ -496,7 +496,7 @@ public class MainRepository {
     private void initializeInputQuestions() {
         inputQuestionAnswers = new HashMap<>();
         inputQuestionAnswers.put(inputQuestionID.CROSSWORD, "Astronaut");
-        inputQuestionAnswers.put(inputQuestionID.NAVIGATION, "4.2");
+        inputQuestionAnswers.put(inputQuestionID.NAVIGATION, "10");
     }
 
     public String getInputQuestionAnswer(inputQuestionID id) { return inputQuestionAnswers.get(id); }
