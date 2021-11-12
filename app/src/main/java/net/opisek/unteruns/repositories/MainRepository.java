@@ -520,9 +520,6 @@ public class MainRepository {
         addQrCode(new RouteQrModel("a7eecb31-a434-4bdb-b1ea-615193db4921", getLocation("kapellchen")));
         addQrCode(new RouteQrModel("59f3796e-4790-40c7-b360-6e5e1d43ef2a", getLocation("ggm2")));
 
-        addQrCode(new RouteQrModel("e6c99c55-7b73-45c5-b8d7-30a6ec6c3f07", getLocation("house1")));
-        addQrCode(new RouteQrModel("81837642-f990-4d3b-b84c-1ca7d710ab5f", getLocation("house2")));
-
         addQrCode(new MorseQrModel("63b6c8e4-3ac2-4db0-bcd3-ac0dfd695142", getMorseCode("frankfurt")));
         addQrCode(new MorseQrModel("f0b390db-5ddc-4b00-8a1a-872011d9eb43", getMorseCode("london")));
         addQrCode(new MorseQrModel("92b2d14e-522c-49c9-9065-b8f694eb8722", getMorseCode("mainburg")));
