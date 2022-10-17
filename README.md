@@ -1,5 +1,5 @@
 # UnterUns
-The app for a Geocaching school project.
+An app for a Geocaching school project.
 
 The group project included:
 - Planning out two routes
